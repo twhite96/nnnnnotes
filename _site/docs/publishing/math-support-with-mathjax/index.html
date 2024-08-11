@@ -1,0 +1,45 @@
+<h1 id="math-support">Math Support</h1>
+
+<p>Published Foam pages don’t support math formulas by default. To enable this feature, you can add the following code snippet to the end of <code class="language-plaintext highlighter-rouge">_layouts/page.html</code>:</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"</span> <span class="na">type=</span><span class="s">"text/javascript"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/x-mathjax-config"</span><span class="nt">&gt;</span>
+    <span class="nx">MathJax</span><span class="p">.</span><span class="nx">Hub</span><span class="p">.</span><span class="nc">Config</span><span class="p">({</span>
+        <span class="na">tex2jax</span><span class="p">:</span> <span class="p">{</span>
+            <span class="na">skipTags</span><span class="p">:</span> <span class="p">[</span><span class="dl">'</span><span class="s1">script</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">noscript</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">style</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">textarea</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">pre</span><span class="dl">'</span><span class="p">],</span>
+            <span class="na">inlineMath</span><span class="p">:</span> <span class="p">[[</span><span class="dl">'</span><span class="s1">$</span><span class="dl">'</span><span class="p">,</span><span class="dl">'</span><span class="s1">$</span><span class="dl">'</span><span class="p">]]</span>
+        <span class="p">}</span>
+    <span class="p">});</span>
+<span class="nt">&lt;/script&gt;</span>
+</code></pre></div></div>
+
+<p>This approach uses the <a href="https://www.mathjax.org/">MathJax</a> library to render anything delimited by <code class="language-plaintext highlighter-rouge">$</code> (customizable in the snippet above) pairs to inline math and <code class="language-plaintext highlighter-rouge">$$</code> to blocks of math (like a html div tag) using with the AMS-LaTeX dialect embedded within MathJax.</p>
+
+<p>Example of inline math using <code class="language-plaintext highlighter-rouge">$...$</code>:</p>
+
+<p><code class="language-plaintext highlighter-rouge">$e^{i \pi}+1=0$</code>, becomes $e^{i \pi}+1=0$</p>
+
+<p>Example of a math block using <code class="language-plaintext highlighter-rouge">$$...$$</code>:</p>
+
+<p><code class="language-plaintext highlighter-rouge">$$ f_{\mathbf{X}}\left(x_{1}, \ldots, x_{k}\right)=\frac{\exp \left(-\frac{1}{2}(\mathbf{x}-\boldsymbol{\mu})^{\mathrm{T}} \mathbf{\Sigma}^{-1}(\mathbf{x}-\boldsymbol{\mu})\right)}{\sqrt{(2 \pi)^{k}|\mathbf{\Sigma}|}} $$</code></p>
+
+<p>Becomes:</p>
+
+\[f_{\mathbf{X}}\left(x_{1}, \ldots, x_{k}\right)=\frac{\exp \left(-\frac{1}{2}(\mathbf{x}-\boldsymbol{\mu})^{\mathrm{T}} \mathbf{\Sigma}^{-1}(\mathbf{x}-\boldsymbol{\mu})\right)}{\sqrt{(2 \pi)^{k}|\mathbf{\Sigma}|}}\]
+
+<h2 id="alternative-approaches">Alternative approaches</h2>
+
+<p>There are other dialects of LaTeX (instead of AMS), and other JavaScript rendering libraries you may want to use. In a future version of Foam, we may support KaTeX syntax out of the box, but at this time, these integrations are left as an exercise to the user.</p>
+
+<h2 id="why-dont-my-math-expressions-work-on-my-foams-home-page">Why don’t my Math expressions work on my Foam’s home page?</h2>
+
+<p>If you want the index page of your Foam site to render maths, you’ll need to add that to <code class="language-plaintext highlighter-rouge">_layouts/home.html</code> as well, or change the layout of the index page to be “page” instead of “home” by putting this Front Matter on the top of your <code class="language-plaintext highlighter-rouge">readme.md/index.md</code>:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>---
+layout: page
+---
+
+# Your normal title here
+</code></pre></div></div>
+
+<p>Reference: <a href="https://stackoverflow.com/questions/26275645/how-to-support-latex-in-github-pages">How to support latex in github-pages</a></p>

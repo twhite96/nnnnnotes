@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>GitLab Pages | About these notes</title>
+<meta name="generator" content="Jekyll v4.3.3" />
+<meta property="og:title" content="GitLab Pages" />
+<meta property="og:locale" content="en_US" />
+<link rel="canonical" href="http://localhost:4000/docs/publishing/publish-to-gitlab-pages/" />
+<meta property="og:url" content="http://localhost:4000/docs/publishing/publish-to-gitlab-pages/" />
+<meta property="og:site_name" content="About these notes" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="GitLab Pages" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","headline":"GitLab Pages","url":"http://localhost:4000/docs/publishing/publish-to-gitlab-pages/"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <link rel="stylesheet" href="/assets/css/style.css?v=5e25ebfb6b5b6991017cbe8f9120d8b49deb4732">
+    <!-- start custom head snippets, customize with your own _includes/head-custom.html file -->
+
+<!-- Setup Google Analytics -->
+
+
+
+<!-- You can set your favicon here -->
+<!-- link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" -->
+
+<!-- end custom head snippets -->
+
+  </head>
+  <body>
+    <div class="container-lg px-3 my-5 markdown-body">
+      
+      <h1><a href="http://localhost:4000/">About these notes</a></h1>
+      
+
+      <h1 id="gitlab-pages">GitLab Pages</h1>
+
+<p>You don’t have to use GitHub to serve Foam pages. You can also use GitLab.</p>
+
+<p>Gitlab pages can be kept private for private repo, so that your notes are still private.</p>
+
+<h2 id="setup-a-project">Setup a project</h2>
+
+<h3 id="generate-the-directory-from-github">Generate the directory from GitHub</h3>
+
+<p>Generate a solution using the <a href="https://github.com/foambubble/foam-template">Foam template</a>.</p>
+
+<p>Change the remote to GitLab, or copy all the files into a new GitLab repo</p>
+
+<h2 id="publishing-pages-with-gatsby">Publishing pages with Gatsby</h2>
+
+<h3 id="setup-the-gatsby-config">Setup the Gatsby config</h3>
+
+<p>Add a .gatsby-config.js file where:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">$REPO_NAME</code> correspond to the name of your gtlab repo.</li>
+  <li><code class="language-plaintext highlighter-rouge">$USER_NAME</code> correspond to your gitlab username.</li>
+</ul>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">path</span> <span class="o">=</span> <span class="nf">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">path</span><span class="dl">"</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">pathPrefix</span> <span class="o">=</span> <span class="s2">`/$REPO_NAME`</span><span class="p">;</span>
+
+<span class="c1">// Change me</span>
+<span class="kd">const</span> <span class="nx">siteMetadata</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">title</span><span class="p">:</span> <span class="dl">"</span><span class="s2">A title</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">shortName</span><span class="p">:</span> <span class="dl">"</span><span class="s2">A short name</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">description</span><span class="p">:</span> <span class="dl">""</span><span class="p">,</span>
+  <span class="na">imageUrl</span><span class="p">:</span> <span class="dl">"</span><span class="s2">/graph-visualization.jpg</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">siteUrl</span><span class="p">:</span> <span class="dl">"</span><span class="s2">https://$USER_NAME.gitlab.io</span><span class="dl">"</span><span class="p">,</span>
+<span class="p">};</span>
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="nx">siteMetadata</span><span class="p">,</span>
+  <span class="nx">pathPrefix</span><span class="p">,</span>
+  <span class="na">flags</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">DEV_SSR</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">plugins</span><span class="p">:</span> <span class="p">[</span>
+    <span class="s2">`gatsby-plugin-sharp`</span><span class="p">,</span>
+    <span class="p">{</span>
+      <span class="na">resolve</span><span class="p">:</span> <span class="dl">"</span><span class="s2">gatsby-theme-primer-wiki</span><span class="dl">"</span><span class="p">,</span>
+      <span class="na">options</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">defaultColorMode</span><span class="p">:</span> <span class="dl">"</span><span class="s2">night</span><span class="dl">"</span><span class="p">,</span>
+        <span class="na">icon</span><span class="p">:</span> <span class="dl">"</span><span class="s2">./path_to/logo.png</span><span class="dl">"</span><span class="p">,</span>
+        <span class="na">sidebarComponents</span><span class="p">:</span> <span class="p">[</span><span class="dl">"</span><span class="s2">tag</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">category</span><span class="dl">"</span><span class="p">],</span>
+        <span class="na">nav</span><span class="p">:</span> <span class="p">[</span>
+          <span class="p">{</span>
+            <span class="na">title</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Github</span><span class="dl">"</span><span class="p">,</span>
+            <span class="na">url</span><span class="p">:</span> <span class="dl">"</span><span class="s2">https://github.com/$USER_NAME/</span><span class="dl">"</span><span class="p">,</span>
+          <span class="p">},</span>
+          <span class="p">{</span>
+            <span class="na">title</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Gitlab</span><span class="dl">"</span><span class="p">,</span>
+            <span class="na">url</span><span class="p">:</span> <span class="dl">"</span><span class="s2">https://gitlab.com/$USER_NAME/</span><span class="dl">"</span><span class="p">,</span>
+          <span class="p">},</span>
+        <span class="p">],</span>
+        <span class="na">editUrl</span><span class="p">:</span>
+          <span class="dl">"</span><span class="s2">https://gitlab.com/$USER_NAME/$REPO_NAME/tree/main/</span><span class="dl">"</span><span class="p">,</span>
+      <span class="p">},</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+      <span class="na">resolve</span><span class="p">:</span> <span class="dl">"</span><span class="s2">gatsby-source-filesystem</span><span class="dl">"</span><span class="p">,</span>
+      <span class="na">options</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">content</span><span class="dl">"</span><span class="p">,</span>
+        <span class="na">path</span><span class="p">:</span> <span class="s2">`</span><span class="p">${</span><span class="nx">__dirname</span><span class="p">}</span><span class="s2">`</span><span class="p">,</span>
+        <span class="na">ignore</span><span class="p">:</span> <span class="p">[</span><span class="s2">`**/\.*/**/*`</span><span class="p">],</span>
+      <span class="p">},</span>
+    <span class="p">},</span>
+
+    <span class="p">{</span>
+      <span class="na">resolve</span><span class="p">:</span> <span class="dl">"</span><span class="s2">gatsby-plugin-manifest</span><span class="dl">"</span><span class="p">,</span>
+      <span class="na">options</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">name</span><span class="p">:</span> <span class="nx">siteMetadata</span><span class="p">.</span><span class="nx">title</span><span class="p">,</span>
+        <span class="na">short_name</span><span class="p">:</span> <span class="nx">siteMetadata</span><span class="p">.</span><span class="nx">shortName</span><span class="p">,</span>
+        <span class="na">start_url</span><span class="p">:</span> <span class="nx">pathPrefix</span><span class="p">,</span>
+        <span class="na">background_color</span><span class="p">:</span> <span class="s2">`#f7f0eb`</span><span class="p">,</span>
+        <span class="na">display</span><span class="p">:</span> <span class="s2">`standalone`</span><span class="p">,</span>
+        <span class="na">icon</span><span class="p">:</span> <span class="nx">path</span><span class="p">.</span><span class="nf">resolve</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span> <span class="dl">"</span><span class="s2">./path_to/logo.png</span><span class="dl">"</span><span class="p">),</span>
+      <span class="p">},</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+      <span class="na">resolve</span><span class="p">:</span> <span class="s2">`gatsby-plugin-sitemap`</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+      <span class="na">resolve</span><span class="p">:</span> <span class="dl">"</span><span class="s2">gatsby-plugin-robots-txt</span><span class="dl">"</span><span class="p">,</span>
+      <span class="na">options</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">host</span><span class="p">:</span> <span class="nx">siteMetadata</span><span class="p">.</span><span class="nx">siteUrl</span><span class="p">,</span>
+        <span class="na">sitemap</span><span class="p">:</span> <span class="s2">`</span><span class="p">${</span><span class="nx">siteMetadata</span><span class="p">.</span><span class="nx">siteUrl</span><span class="p">}</span><span class="s2">/sitemap/sitemap-index.xml`</span><span class="p">,</span>
+        <span class="na">policy</span><span class="p">:</span> <span class="p">[{</span> <span class="na">userAgent</span><span class="p">:</span> <span class="dl">"</span><span class="s2">*</span><span class="dl">"</span><span class="p">,</span> <span class="na">allow</span><span class="p">:</span> <span class="dl">"</span><span class="s2">/</span><span class="dl">"</span> <span class="p">}],</span>
+      <span class="p">},</span>
+    <span class="p">},</span>
+  <span class="p">],</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p>And a <code class="language-plaintext highlighter-rouge">package.json</code> file containing:</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"private"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"wiki"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0.0"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"license"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MIT"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"scripts"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"develop"</span><span class="p">:</span><span class="w"> </span><span class="s2">"gatsby develop -H 0.0.0.0"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"start"</span><span class="p">:</span><span class="w"> </span><span class="s2">"gatsby develop -H 0.0.0.0"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"build"</span><span class="p">:</span><span class="w"> </span><span class="s2">"gatsby build"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"clean"</span><span class="p">:</span><span class="w"> </span><span class="s2">"gatsby clean"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"serve"</span><span class="p">:</span><span class="w"> </span><span class="s2">"gatsby serve"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"test"</span><span class="p">:</span><span class="w"> </span><span class="s2">"echo test"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"dependencies"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"@primer/react"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^34.1.0"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"@primer/css"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^17.5.0"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"foam-cli"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^0.11.0"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"gatsby"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^3.12.0"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"gatsby-plugin-manifest"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^3.12.0"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"gatsby-plugin-robots-txt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^1.6.9"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"gatsby-plugin-sitemap"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^5.4.0"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"gatsby-source-filesystem"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^3.12.0"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"gatsby-theme-primer-wiki"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^1.14.5"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"react"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^17.0.2"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"react-dom"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^17.0.2"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>The theme will be based on <a href="https://github.com/theowenyoung/gatsby-theme-primer-wiki">gatsby-theme-primer-wiki</a>.</p>
+
+<p>To test the theme locally first run <code class="language-plaintext highlighter-rouge">yarn install</code> and then use <code class="language-plaintext highlighter-rouge">gatsby develop</code> to serve the website.
+See gatsby documentation for more details.</p>
+
+<h3 id="set-up-the-ci-for-deployment">Set-up the CI for deployment</h3>
+
+<p>Create a <code class="language-plaintext highlighter-rouge">.gitlab-ci.yml</code> file containing:</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># To contribute improvements to CI/CD templates, please follow the Development guide at:</span>
+<span class="c1"># https://docs.gitlab.com/ee/development/cicd/templates.html</span>
+<span class="c1"># This specific template is located at:</span>
+<span class="c1"># https://gitlab.com/gitlab-org/gitlab/-/blob/master/lib/gitlab/ci/templates/Pages/Gatsby.gitlab-ci.yml</span>
+
+<span class="na">image</span><span class="pi">:</span> <span class="s">node:latest</span>
+
+<span class="na">stages</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s">deploy</span>
+
+<span class="na">pages</span><span class="pi">:</span>
+  <span class="na">stage</span><span class="pi">:</span> <span class="s">deploy</span>
+  <span class="c1"># This folder is cached between builds</span>
+  <span class="c1"># https://docs.gitlab.com/ee/ci/yaml/index.html#cache</span>
+  <span class="na">cache</span><span class="pi">:</span>
+    <span class="na">paths</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">node_modules/</span>
+      <span class="c1"># Enables git-lab CI caching. Both .cache and public must be cached, otherwise builds will fail.</span>
+      <span class="pi">-</span> <span class="s">.cache/</span>
+      <span class="pi">-</span> <span class="s">public/</span>
+  <span class="na">script</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">yarn install</span>
+    <span class="pi">-</span> <span class="s">./node_modules/.bin/gatsby build --prefix-paths</span>
+  <span class="na">artifacts</span><span class="pi">:</span>
+    <span class="na">paths</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">public</span>
+  <span class="na">rules</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">if</span><span class="pi">:</span> <span class="s">$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH</span>
+</code></pre></div></div>
+
+<p>This pipeline will now serve your website on every push to the main branch of your project.</p>
+
+<h2 id="publish-with-jekyll">Publish with Jekyll</h2>
+
+<h3 id="add-a-_configyaml">Add a _config.yaml</h3>
+
+<p>Add another file to the root directory (the one with <code class="language-plaintext highlighter-rouge">readme.md</code> in it) called <code class="language-plaintext highlighter-rouge">_config.yaml</code> (no extension)</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">title</span><span class="pi">:</span> <span class="s">My Awesome Foam Project</span>
+<span class="na">baseurl</span><span class="pi">:</span> <span class="s2">"</span><span class="s">"</span> <span class="c1"># the subpath of your site, e.g. /blog</span>
+<span class="na">url</span><span class="pi">:</span> <span class="s2">"</span><span class="s">/"</span> <span class="c1"># the base hostname &amp; protocol for your site</span>
+<span class="na">theme</span><span class="pi">:</span> <span class="s">jekyll-theme-minimal</span>
+<span class="na">plugins</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s">jekyll-optional-front-matter</span>
+<span class="na">optional_front_matter</span><span class="pi">:</span>
+  <span class="na">remove_originals</span><span class="pi">:</span> <span class="kc">true</span>
+<span class="na">defaults</span><span class="pi">:</span>
+  <span class="pi">-</span>
+    <span class="na">scope</span><span class="pi">:</span>
+      <span class="na">path</span><span class="pi">:</span> <span class="s2">"</span><span class="s">"</span> <span class="c1"># we need to add this to properly render layouts</span>
+    <span class="na">values</span><span class="pi">:</span>
+      <span class="na">layout</span><span class="pi">:</span> <span class="s2">"</span><span class="s">default"</span>
+</code></pre></div></div>
+
+<p>You can choose a theme if you want from places like <a href="https://jekyllthemes.io/">Jekyll Themes</a></p>
+
+<h3 id="add-a-gemlock-file">Add a Gemlock file</h3>
+
+<p>Add another file to the root directory (the one with <code class="language-plaintext highlighter-rouge">readme.md</code> in it) called <code class="language-plaintext highlighter-rouge">Gemfile</code> (no extension)</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">source</span> <span class="s2">"https://rubygems.org"</span>
+
+<span class="n">gem</span> <span class="s2">"jekyll"</span>
+<span class="n">gem</span> <span class="s2">"jekyll-theme-minimal"</span>
+<span class="n">gem</span> <span class="s2">"jekyll-optional-front-matter"</span>
+</code></pre></div></div>
+
+<p>Commit the file and push it to gitlab.</p>
+
+<h3 id="setup-cicd">Setup CI/CD</h3>
+
+<ol>
+  <li>From the project home in GitLab click <code class="language-plaintext highlighter-rouge">Set up CI/CD</code></li>
+  <li>Choose <code class="language-plaintext highlighter-rouge">Jekyll</code> as your template from the template dropdown</li>
+  <li>Click <code class="language-plaintext highlighter-rouge">commit</code></li>
+  <li>Now when you go to CI / CD &gt; Pipelines, you should see the code running</li>
+</ol>
+
+<h3 id="troubleshooting">Troubleshooting</h3>
+
+<ul>
+  <li><em>Could not locate Gemfile</em> - You didn’t follow the steps above to <a href="#add-a-gemlock-file">Add a Gemlock file</a></li>
+  <li><em>Conversion error: Jekyll::Converters::Scss encountered an error while converting</em> You need to reference a theme.</li>
+  <li><em>Pages are running in CI/CD, but I only ever see <code class="language-plaintext highlighter-rouge">test</code>, and never deploy</em> - Perhaps you’ve renamed the main branch (from master) - check the settings in <code class="language-plaintext highlighter-rouge">.gitlab-ci.yml</code> and ensure the deploy command is running to the branch you expect it to.</li>
+  <li><em>I deployed, but my .msd files don’t seem to be being converted into .html files</em> - You need a gem that GitHub installs by default - check <code class="language-plaintext highlighter-rouge">gem "jekyll-optional-front-matter"</code> appears in the <code class="language-plaintext highlighter-rouge">Gemfile</code></li>
+</ul>
+
+
+<script type="text/javascript">
+  // Hack: Replace page-link with "Page Title"
+  document.querySelectorAll(".markdown-body a[title]").forEach((a) => {
+    a.innerText = a.title;
+  });
+  // Hack: Remove .md extension from wikilinks to get the html in jekyll
+  document.querySelectorAll("a").forEach(l => {
+    if (l.href.endsWith('.md')) {
+      l.href = l.href.substring(0, l.href.length-3)
+    }
+  })
+</script>
+
+
+      
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.0/anchor.min.js" integrity="sha256-lZaRhKri35AyJSypXXs4o6OPFTbTmUoltBbDCbdzegg=" crossorigin="anonymous"></script>
+    <script>anchors.add();</script>
+  </body>
+</html>

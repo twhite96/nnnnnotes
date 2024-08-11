@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Tags | About these notes</title>
+<meta name="generator" content="Jekyll v4.3.3" />
+<meta property="og:title" content="Tags" />
+<meta property="og:locale" content="en_US" />
+<link rel="canonical" href="http://localhost:4000/docs/features/tags/" />
+<meta property="og:url" content="http://localhost:4000/docs/features/tags/" />
+<meta property="og:site_name" content="About these notes" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Tags" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","headline":"Tags","url":"http://localhost:4000/docs/features/tags/"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <link rel="stylesheet" href="/assets/css/style.css?v=5e25ebfb6b5b6991017cbe8f9120d8b49deb4732">
+    <!-- start custom head snippets, customize with your own _includes/head-custom.html file -->
+
+<!-- Setup Google Analytics -->
+
+
+
+<!-- You can set your favicon here -->
+<!-- link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" -->
+
+<!-- end custom head snippets -->
+
+  </head>
+  <body>
+    <div class="container-lg px-3 my-5 markdown-body">
+      
+      <h1><a href="http://localhost:4000/">About these notes</a></h1>
+      
+
+      <h1 id="tags">Tags</h1>
+
+<p>You can add tags to your notes to categorize or link notes together.</p>
+
+<h2 id="creating-a-tag">Creating a tag</h2>
+
+<p>There are two ways of creating a tag:</p>
+
+<ul>
+  <li>Adding a <code class="language-plaintext highlighter-rouge">#tag</code> anywhere in the text of the note, for example: #my-tag1</li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>Using the <code class="language-plaintext highlighter-rouge">tags: tag1, tag2</code> yaml frontmatter [[note-properties</td>
+          <td>note property]]. Notice <code class="language-plaintext highlighter-rouge">my-tag1</code> and <code class="language-plaintext highlighter-rouge">my-tag2</code> tags which are added to this document this way.</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+</ul>
+
+<p>Tags can also be hierarchical, so you can have <code class="language-plaintext highlighter-rouge">#parent/child</code> such as #my-tag3/info.</p>
+
+<h3 id="tag-completion">Tag completion</h3>
+
+<table>
+  <tbody>
+    <tr>
+      <td>Typing the <code class="language-plaintext highlighter-rouge">#</code> character will launch VS Code’s “Intellisense.” This provider will show a list of possible tags that match the character. If you are editing in the frontmatter [[note-properties</td>
+      <td>note property]], you can invoke tag completion on the <code class="language-plaintext highlighter-rouge">tags:</code> line by either typing the <code class="language-plaintext highlighter-rouge">#</code> character, or using the <a href="https://code.visualstudio.com/docs/editor/intellisense">“trigger suggest”</a> keybinding (usually <code class="language-plaintext highlighter-rouge">ctrl+space</code>). If the <code class="language-plaintext highlighter-rouge">#</code> is used in the frontmatter, it will be removed when the tag is inserted.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="using-tag-explorer">Using <em>Tag Explorer</em></h2>
+
+<p>It’s possible to navigate tags via the Tag Explorer panel. Expand the Tag Explorer view in the left side bar which will list all the tags found in current Foam environment. Then, each level of tags can be expanded until the options to search by tag and a list of all files containing a particular tag are shown.</p>
+
+<p>Tags can also be visualized in the Foam Graph Explorer. See [<a href="/docs/features/graph-visualization/" title="Graph Visualization">graph-visualization</a>] for more info including how to change the color of nodes representing tags.</p>
+
+<h2 id="styling-tags">Styling tags</h2>
+
+<p>It is possible to customize the way that tags look in the Markdown Preview panel that renders your Foam notes. This requires some knowledge of the CSS language, which is used to customize the styles of web technologies such as VSCode. A cursory introduction to CSS can be <a href="https://www.freecodecamp.org/news/get-started-with-css-in-5-minutes-e0804813fc3e/">found here</a>.</p>
+
+<ol>
+  <li>Create a CSS file within your Foam project, for example in <code class="language-plaintext highlighter-rouge">.foam/css/custom-tag-style.css</code> or <a href="../../.vscode/custom-tag-style.css">.vscode/custom-tag-style.css</a></li>
+  <li>Add CSS code that targets the <code class="language-plaintext highlighter-rouge">.foam-tag</code> class</li>
+  <li>Add a rule for each <a href="https://www.w3schools.com/cssref/index.php">CSS property</a> you would like applied to your tags.</li>
+  <li>Open the <code class="language-plaintext highlighter-rouge">.vscode/settings.json</code> file (or the Settings browser with <code class="language-plaintext highlighter-rouge">ctrl+,</code>)</li>
+  <li>Add the path to your new stylesheet to the <code class="language-plaintext highlighter-rouge">markdown.styles</code> setting.</li>
+</ol>
+
+<blockquote>
+  <p>Note: the file path for the stylesheet will be relative to the currently open folder in the workspace when changing this setting for the current workspace. If changing this setting for the user, then the file path will be relative to your global <a href="https://code.visualstudio.com/docs/getstarted/settings">VSCode settings</a>.</p>
+</blockquote>
+
+<p>The end result will be a CSS file that looks similar to the content below. Now you can make your tags standout in your note previews.</p>
+
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">.foam-tag</span><span class="p">{</span>
+  <span class="nl">color</span><span class="p">:</span><span class="m">#ffffff</span><span class="p">;</span>
+  <span class="nl">background-color</span><span class="p">:</span> <span class="m">#000000</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><img src="/assets/images/custom-tag-style.png" alt="custom tag style demo" /></p>
+
+<h2 id="using-backlinks-in-place-of-tags">Using backlinks in place of tags</h2>
+
+<p>Given the power of backlinks, some people prefer to use them as tags.
+For example you can tag your notes about books with [[book]].</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>[note-properties</td>
+      <td>note property]: /docs/features/note-properties/ “Note Properties”</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+<script type="text/javascript">
+  // Hack: Replace page-link with "Page Title"
+  document.querySelectorAll(".markdown-body a[title]").forEach((a) => {
+    a.innerText = a.title;
+  });
+  // Hack: Remove .md extension from wikilinks to get the html in jekyll
+  document.querySelectorAll("a").forEach(l => {
+    if (l.href.endsWith('.md')) {
+      l.href = l.href.substring(0, l.href.length-3)
+    }
+  })
+</script>
+
+
+      
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.0/anchor.min.js" integrity="sha256-lZaRhKri35AyJSypXXs4o6OPFTbTmUoltBbDCbdzegg=" crossorigin="anonymous"></script>
+    <script>anchors.add();</script>
+  </body>
+</html>

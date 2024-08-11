@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Write your notes in GitHub Gist | About these notes</title>
+<meta name="generator" content="Jekyll v4.3.3" />
+<meta property="og:title" content="Write your notes in GitHub Gist" />
+<meta property="og:locale" content="en_US" />
+<link rel="canonical" href="http://localhost:4000/docs/recipes/write-your-notes-in-github-gist/" />
+<meta property="og:url" content="http://localhost:4000/docs/recipes/write-your-notes-in-github-gist/" />
+<meta property="og:site_name" content="About these notes" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Write your notes in GitHub Gist" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","headline":"Write your notes in GitHub Gist","url":"http://localhost:4000/docs/recipes/write-your-notes-in-github-gist/"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <link rel="stylesheet" href="/assets/css/style.css?v=5e25ebfb6b5b6991017cbe8f9120d8b49deb4732">
+    <!-- start custom head snippets, customize with your own _includes/head-custom.html file -->
+
+<!-- Setup Google Analytics -->
+
+
+
+<!-- You can set your favicon here -->
+<!-- link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" -->
+
+<!-- end custom head snippets -->
+
+  </head>
+  <body>
+    <div class="container-lg px-3 my-5 markdown-body">
+      
+      <h1><a href="http://localhost:4000/">About these notes</a></h1>
+      
+
+      <h1 id="write-your-notes-in-github-gist">Write your notes in GitHub Gist</h1>
+
+<p>This #recipe will allow you to persist your notes in a GitHub repository, and automatically sync changes without needing to manually commit/push/pull, then GistPad might be an option worth exploring.</p>
+
+<p><a href="https://aka.ms/gistpad">GistPad</a> is a Visual Studio Code extension that allows you to edit your GitHub gists and repos, without needing to clone anything locally.</p>
+
+<p>It provides support for editing Foam workspaces, complete with <code class="language-plaintext highlighter-rouge">[[link]]</code> <a href="https://github.com/vsls-contrib/gistpad#links">completion/navigation</a>, <a href="https://github.com/vsls-contrib/gistpad#daily-pages">daily pages</a>, <a href="https://github.com/vsls-contrib/gistpad#pasting-images-1">pasting images</a> and <a href="https://github.com/vsls-contrib/gistpad#backlinks">backlinks</a>.</p>
+
+<p><img width="700px" src="https://user-images.githubusercontent.com/116461/87234714-96ba9400-c388-11ea-92c3-544d9a3bb633.png" /></p>
+
+<h2 id="getting-started">Getting started</h2>
+
+<p>To start using GistPad for your Foam-based knowledge base, simply perform the following steps:</p>
+
+<ol>
+  <li>
+    <p>Download the <a href="https://aka.ms/gistpad">GistPad extension</a> and then re-start Visual Studio Code</p>
+  </li>
+  <li>
+    <p>Run the <code class="language-plaintext highlighter-rouge">GistPad: Sign In</code> command and then complete the authentication flow using your GitHub account</p>
+  </li>
+  <li>
+    <p>Run the <code class="language-plaintext highlighter-rouge">GistPad: Open Repository</code> command and select the <code class="language-plaintext highlighter-rouge">Create repo from template...</code> or <code class="language-plaintext highlighter-rouge">Create private repo from template...</code> depending on your preference</p>
+  </li>
+  <li>
+    <p>Select the <code class="language-plaintext highlighter-rouge">Foam-style wiki</code> template, and then specify a name for your Foam workspace (e.g. <code class="language-plaintext highlighter-rouge">my-foam-notes</code>, <code class="language-plaintext highlighter-rouge">johns-knowledge-base</code>)</p>
+  </li>
+</ol>
+
+<p>Your new repo will be created in your GitHub account, and the <code class="language-plaintext highlighter-rouge">Foam</code> welcome page will be automatically opened. If you already have an existing Foam workspace in GitHub, then when you run step #3 above, simply select or specify the name of the GitHub repository instead.</p>
+
+<blockquote>
+  <p>Note: If you have any and all feedback on how GistPad can be improved to support your Foam workflow, please don’t hesitate to <a href="https://github.com/vsls-contrib/gistpad">let us know</a>! 👍</p>
+</blockquote>
+
+<p><img width="700px" src="https://user-images.githubusercontent.com/116461/87863222-c1b76180-c90d-11ea-87d9-04bee1c58a0d.png" /></p>
+
+<h2 id="managing-your-workspace">Managing your workspace</h2>
+
+<p>Once you’ve opened/created the Foam repository, it will appear in the <code class="language-plaintext highlighter-rouge">Repositories</code> view of the <code class="language-plaintext highlighter-rouge">GistPad</code> tab (the one with the little notebook icon). From this tree view, you can add/edit/delete/rename new pages, upload local files, as well as view the backlinks for each page (they appear as child notes of a page).</p>
+
+<p><img width="250px" src="https://user-images.githubusercontent.com/116461/87234704-83a7c400-c388-11ea-90a8-2a660bef4dc5.png" /></p>
+
+<h2 id="editing-your-workspace">Editing your workspace</h2>
+
+<p>When you create or open a page, you can edit the markdown content as usual, as well as <a href="https://github.com/vsls-contrib/gistpad#pasting-images-1">paste images</a>, and create <a href="https://github.com/vsls-contrib/gistpad#links"><code class="language-plaintext highlighter-rouge">[[links]]</code> to other pages</a>. When you type <code class="language-plaintext highlighter-rouge">[[</code>, you’ll receive auto-completion for the existing pages in your workspace, and you can also automatically create new pages by simply creating a link to it.</p>
+
+<p>Since you’re using the Visual Studio Code markdown editor, you can benefit from all of the rich language services (e.g. syntax highlighting, header collapsing), as well as the extension ecosystem (e.g. <a href="https://marketplace.visualstudio.com/items?itemName=bierner.emojisense">Emojisense</a>).</p>
+
+<h2 id="navigating-your-workspace">Navigating your workspace</h2>
+
+<p>When editing a file, you can easily navigate <code class="language-plaintext highlighter-rouge">[[links]]</code> by hovering over them to see a preview of their contents and/or <code class="language-plaintext highlighter-rouge">cmd+clicking</code> on them in order to jump to the respective page. Furthermore, when you add a link to a page, a <a href="https://github.com/vsls-contrib/gistpad#backlinks">backlink</a> is automatically added to it.</p>
+
+<p>You can view a page’s backlinks using either of the following techniques:</p>
+
+<ol>
+  <li>
+    <p>Expanding the file’s node in the <code class="language-plaintext highlighter-rouge">Repositories</code> tree, since it’s child nodes will represent backlinks. This makes it easy to browse your pages and their backlinks in a single hierarchical view.</p>
+  </li>
+  <li>
+    <p>Opening a file, and then viewing it’s backlinks list at the bottom of the editor view. This makes it easy to read a page and then see its backlinks in a contextually rich way.</p>
+  </li>
+</ol>
+
+<h2 id="daily-pages">Daily Pages</h2>
+
+<p>In addition to creating arbitrary pages, you can use GistPad for journaling or capturing <a href="https://github.com/vsls-contrib/gistpad#daily-pages">daily notes</a>. Simply click the calendar icon in the <code class="language-plaintext highlighter-rouge">Repositories</code> tree, which will open up the page that represents today. If the page doesn’t already exist, then it will be created in the workspace before being opened.</p>
+
+<p><img width="700px" src="https://user-images.githubusercontent.com/116461/87234721-b356cc00-c388-11ea-946a-e7f9c92258a6.png" /></p>
+
+
+<script type="text/javascript">
+  // Hack: Replace page-link with "Page Title"
+  document.querySelectorAll(".markdown-body a[title]").forEach((a) => {
+    a.innerText = a.title;
+  });
+  // Hack: Remove .md extension from wikilinks to get the html in jekyll
+  document.querySelectorAll("a").forEach(l => {
+    if (l.href.endsWith('.md')) {
+      l.href = l.href.substring(0, l.href.length-3)
+    }
+  })
+</script>
+
+
+      
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.0/anchor.min.js" integrity="sha256-lZaRhKri35AyJSypXXs4o6OPFTbTmUoltBbDCbdzegg=" crossorigin="anonymous"></script>
+    <script>anchors.add();</script>
+  </body>
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Note Properties | About these notes</title>
+<meta name="generator" content="Jekyll v4.3.3" />
+<meta property="og:title" content="Note Properties" />
+<meta property="og:locale" content="en_US" />
+<link rel="canonical" href="http://localhost:4000/docs/features/note-properties/" />
+<meta property="og:url" content="http://localhost:4000/docs/features/note-properties/" />
+<meta property="og:site_name" content="About these notes" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Note Properties" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","headline":"Note Properties","url":"http://localhost:4000/docs/features/note-properties/"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <link rel="stylesheet" href="/assets/css/style.css?v=5e25ebfb6b5b6991017cbe8f9120d8b49deb4732">
+    <!-- start custom head snippets, customize with your own _includes/head-custom.html file -->
+
+<!-- Setup Google Analytics -->
+
+
+
+<!-- You can set your favicon here -->
+<!-- link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" -->
+
+<!-- end custom head snippets -->
+
+  </head>
+  <body>
+    <div class="container-lg px-3 my-5 markdown-body">
+      
+      <h1><a href="http://localhost:4000/">About these notes</a></h1>
+      
+
+      <h1 id="note-properties">Note Properties</h1>
+
+<p>At the top of the file you can have a section where you define your properties. This section is known as the <a href="https://learn.cloudcannon.com/jekyll/introduction-to-jekyll-front-matter/">Front-Matter</a> of the document and uses <a href="https://www.codeproject.com/Articles/1214409/Learn-YAML-in-five-minutes">YAML formatting</a>.</p>
+
+<blockquote>
+  <p>Be aware that this YAML section needs to be at the very top of the file to be valid.</p>
+</blockquote>
+
+<p>For example, for this file, we have:</p>
+
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
+<span class="na">type</span><span class="pi">:</span> <span class="s">feature</span>
+<span class="na">keywords</span><span class="pi">:</span> <span class="s">hello world, bonjour</span>
+<span class="nn">---</span>
+</code></pre></div></div>
+
+<p>This sets the <code class="language-plaintext highlighter-rouge">type</code> of this document to <code class="language-plaintext highlighter-rouge">feature</code> and sets <strong>three</strong> keywords for the document: <code class="language-plaintext highlighter-rouge">hello</code>, <code class="language-plaintext highlighter-rouge">world</code>, and <code class="language-plaintext highlighter-rouge">bonjour</code>. The YAML parser will treat both spaces and commas as the separators for these YAML properties. If you want to use multi-word values for these properties, you will need to combine the words with dashes or underscores (i.e. instead of <code class="language-plaintext highlighter-rouge">hello world</code>, use <code class="language-plaintext highlighter-rouge">hello_world</code> or <code class="language-plaintext highlighter-rouge">hello-world</code>).</p>
+
+<blockquote>
+  <p>You can set as many custom properties for a document as you like, but there are a few <a href="#special-properties">special properties</a> defined by Foam.</p>
+</blockquote>
+
+<h2 id="special-properties">Special Properties</h2>
+
+<p>Some properties have special meaning for Foam:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">title</code></td>
+      <td>will assign the name to the note that you will see in the graph, regardless of the filename or the first heading (also see how to [[write-notes-in-foam]])</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">type</code></td>
+      <td>can be used to style notes differently in the graph (also see [[graph-visualization]]). The default type for a document is <code class="language-plaintext highlighter-rouge">note</code> unless otherwise specified with this property.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">tags</code></td>
+      <td>can be used to add tags to a note (see [[tags]])</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>For example:</p>
+
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
+<span class="na">title</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Note</span><span class="nv"> </span><span class="s">Title"</span>
+<span class="na">type</span><span class="pi">:</span> <span class="s2">"</span><span class="s">daily-note"</span>
+<span class="na">tags</span><span class="pi">:</span> <span class="s">daily, funny, planning</span>
+
+<span class="nn">---</span>
+</code></pre></div></div>
+
+<h2 id="foam-template-properties">Foam Template Properties</h2>
+
+<p>There also exists properties that are even more specific to Foam templates, see [[note-templates#Metadata]] for more info.</p>
+
+
+
+<script type="text/javascript">
+  // Hack: Replace page-link with "Page Title"
+  document.querySelectorAll(".markdown-body a[title]").forEach((a) => {
+    a.innerText = a.title;
+  });
+  // Hack: Remove .md extension from wikilinks to get the html in jekyll
+  document.querySelectorAll("a").forEach(l => {
+    if (l.href.endsWith('.md')) {
+      l.href = l.href.substring(0, l.href.length-3)
+    }
+  })
+</script>
+
+
+      
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.0/anchor.min.js" integrity="sha256-lZaRhKri35AyJSypXXs4o6OPFTbTmUoltBbDCbdzegg=" crossorigin="anonymous"></script>
+    <script>anchors.add();</script>
+  </body>
+</html>

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Graph Visualization | About these notes</title>
+<meta name="generator" content="Jekyll v4.3.3" />
+<meta property="og:title" content="Graph Visualization" />
+<meta property="og:locale" content="en_US" />
+<link rel="canonical" href="http://localhost:4000/docs/features/graph-visualization/" />
+<meta property="og:url" content="http://localhost:4000/docs/features/graph-visualization/" />
+<meta property="og:site_name" content="About these notes" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Graph Visualization" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","headline":"Graph Visualization","url":"http://localhost:4000/docs/features/graph-visualization/"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <link rel="stylesheet" href="/assets/css/style.css?v=5e25ebfb6b5b6991017cbe8f9120d8b49deb4732">
+    <!-- start custom head snippets, customize with your own _includes/head-custom.html file -->
+
+<!-- Setup Google Analytics -->
+
+
+
+<!-- You can set your favicon here -->
+<!-- link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" -->
+
+<!-- end custom head snippets -->
+
+  </head>
+  <body>
+    <div class="container-lg px-3 my-5 markdown-body">
+      
+      <h1><a href="http://localhost:4000/">About these notes</a></h1>
+      
+
+      <h1 id="graph-visualization">Graph Visualization</h1>
+
+<p>Foam comes with a graph visualization of your notes.
+To see the graph execute the <code class="language-plaintext highlighter-rouge">Foam: Show Graph</code> command.</p>
+
+<p>Your files, such as notes and documents, are shown as the nodes of the graph along with the tags defined in your notes. The edges of the graph represent either a link between two files or a file that contains a certain tag. A node in the graph will grow in size with the number of connections it has, representing stronger or more defined concepts and topics.</p>
+
+<h2 id="graph-navigation">Graph Navigation</h2>
+
+<p>With the Foam graph visualization you can:</p>
+
+<ul>
+  <li>highlight a node by hovering on it, to quickly see how it’s connected to the rest of your notes</li>
+  <li>select one or more (by keeping <code class="language-plaintext highlighter-rouge">shift</code> pressed while selecting) nodes by clicking on them, to better understand the structure of your notes</li>
+  <li>navigate to a note by clicking on it’s node while pressing <code class="language-plaintext highlighter-rouge">ctrl</code> or <code class="language-plaintext highlighter-rouge">cmd</code></li>
+  <li>automatically center the graph on the currently edited note, to immediately see its connections</li>
+</ul>
+
+<h2 id="filter-view">Filter View</h2>
+
+<p>If you only wish to view certain types of notes or tags, or want to hide linked attachment nodes then you can apply filters to the graph.</p>
+
+<ul>
+  <li>Open the graph view using the <code class="language-plaintext highlighter-rouge">Foam: Show Graph</code> command</li>
+  <li>Click the button in the top right corner of the graph view that says “Open Controls”</li>
+  <li>Expand the “Filter By Type” dropdown to view the selection of types that you can filter by</li>
+  <li>Uncheck the checkbox for any type you want to hide</li>
+  <li>The types displayed in this dropdown are defined by [[note-properties]] which includes Foam-standard types as well as custom types defined by you!</li>
+</ul>
+
+<p><img src="/assets/images/graph-filter.gif" alt="Graph filtering demo" /></p>
+
+<h2 id="custom-graph-styles">Custom Graph Styles</h2>
+
+<p>The Foam graph will use the current VS Code theme by default, but it’s possible to customize it with the <code class="language-plaintext highlighter-rouge">foam.graph.style</code> setting.</p>
+
+<p><img src="/assets/images/graph-style.gif" alt="Graph style demo" /></p>
+
+<p>A sample configuration object is provided below, you can provide as many or as little configuration as you wish:</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nl">"foam.graph.style"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"background"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#202020"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"fontSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"lineColor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#277da1"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"lineWidth"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.2</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"particleWidth"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"highlightedForeground"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#f9c74f"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"node"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"note"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#277da1"</span><span class="p">,</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">background</code> background color of the graph, adjust to increase contrast</li>
+  <li><code class="language-plaintext highlighter-rouge">fontSize</code> size of the title font for each node</li>
+  <li><code class="language-plaintext highlighter-rouge">lineColor</code> color of the edges between nodes in the graph</li>
+  <li><code class="language-plaintext highlighter-rouge">lineWidth</code> thickness of the edges between nodes</li>
+  <li><code class="language-plaintext highlighter-rouge">particleWidth</code> size of the particle animation showing link direction when highlighting a node</li>
+  <li><code class="language-plaintext highlighter-rouge">highlightedForeground</code> color of highlighted nodes and edges when hovering over a node</li>
+  <li>to style individual types of nodes jump to the next section: <a href="#style-nodes-by-type">Style Nodes By Type</a></li>
+</ul>
+
+<h3 id="style-nodes-by-type">Style Nodes by Type</h3>
+
+<p>It is possible to customize the style of a node based on the <code class="language-plaintext highlighter-rouge">type</code> property in the YAML frontmatter of the corresponding document.</p>
+
+<p>There are a few default node types defined by Foam that are displayed in the graph:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">note</code> defines the color for regular nodes whose documents have not overridden the <code class="language-plaintext highlighter-rouge">type</code> property.</li>
+  <li><code class="language-plaintext highlighter-rouge">placeholder</code> defines the color for links that don’t match any existing note. This is a [[placeholder]] because no file with such name exists.
+    <ul>
+      <li>see [[wikilinks]] for more info <!--NOTE: this placeholder link should NOT have an associated file. This is to demonstrate the custom coloring--></li>
+    </ul>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">tag</code> defines the color for nodes representing #tags, allowing tags to be used as graph nodes similar to backlinks.
+    <ul>
+      <li>see [[tags]] for more info</li>
+    </ul>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">feature</code> shows an example of how you can use note types to customize the graph. It defines the color for the notes of type <code class="language-plaintext highlighter-rouge">feature</code>
+    <ul>
+      <li>see [[note-properties]] for details</li>
+    </ul>
+  </li>
+</ul>
+
+<p>For example the following <code class="language-plaintext highlighter-rouge">backlinking.md</code> note:</p>
+
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
+<span class="na">type</span><span class="pi">:</span> <span class="s">feature</span>
+<span class="nn">---</span>
+<span class="gh"># Backlinking</span>
+
+...
+</code></pre></div></div>
+
+<p>And the following <code class="language-plaintext highlighter-rouge">settings.json</code>:</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nl">"foam.graph.style"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"background"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#202020"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"node"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"note"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#277da1"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"placeholder"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#545454"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"tag"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#f9c74f"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"feature"</span><span class="p">:</span><span class="w"> </span><span class="s2">"red"</span><span class="p">,</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Will result in the following graph:</p>
+
+<p><img src="/assets/images/style-node-by-type.png" alt="Style node by type" /></p>
+
+
+
+<script type="text/javascript">
+  // Hack: Replace page-link with "Page Title"
+  document.querySelectorAll(".markdown-body a[title]").forEach((a) => {
+    a.innerText = a.title;
+  });
+  // Hack: Remove .md extension from wikilinks to get the html in jekyll
+  document.querySelectorAll("a").forEach(l => {
+    if (l.href.endsWith('.md')) {
+      l.href = l.href.substring(0, l.href.length-3)
+    }
+  })
+</script>
+
+
+      
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.0/anchor.min.js" integrity="sha256-lZaRhKri35AyJSypXXs4o6OPFTbTmUoltBbDCbdzegg=" crossorigin="anonymous"></script>
+    <script>anchors.add();</script>
+  </body>
+</html>

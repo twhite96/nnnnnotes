@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Publish to Vercel | About these notes</title>
+<meta name="generator" content="Jekyll v4.3.3" />
+<meta property="og:title" content="Publish to Vercel" />
+<meta property="og:locale" content="en_US" />
+<link rel="canonical" href="http://localhost:4000/docs/publishing/publish-to-vercel/" />
+<meta property="og:url" content="http://localhost:4000/docs/publishing/publish-to-vercel/" />
+<meta property="og:site_name" content="About these notes" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Publish to Vercel" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","headline":"Publish to Vercel","url":"http://localhost:4000/docs/publishing/publish-to-vercel/"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <link rel="stylesheet" href="/assets/css/style.css?v=5e25ebfb6b5b6991017cbe8f9120d8b49deb4732">
+    <!-- start custom head snippets, customize with your own _includes/head-custom.html file -->
+
+<!-- Setup Google Analytics -->
+
+
+
+<!-- You can set your favicon here -->
+<!-- link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" -->
+
+<!-- end custom head snippets -->
+
+  </head>
+  <body>
+    <div class="container-lg px-3 my-5 markdown-body">
+      
+      <h1><a href="http://localhost:4000/">About these notes</a></h1>
+      
+
+      <h1 id="publish-to-vercel">Publish to Vercel</h1>
+
+<p>This #recipe shows you how to deploy the default Foam website template to Vercel.</p>
+
+<p><a href="https://vercel.com/">Vercel</a> is a static website hosting solution similar to GitHub Pages (see [[publish-to-github-pages]]).</p>
+
+<h2 id="setting-up-the-project">Setting up the project</h2>
+
+<h3 id="using-foams-template">Using Foam’s template</h3>
+
+<p>Generate a GitHub repository using the default <a href="https://github.com/foambubble/foam-template">Foam template</a>, this will be the workspace that we will be deploying with Vercel. This workspace is a barebone Jekyll source website, which means we can customize and install plugins just like any other Jekyll websites.</p>
+
+<p>As we won’t be using GitHub Pages, we will be adding a few configuration files in order to help Vercel pick up on how to build our site.</p>
+
+<h3 id="adding-a-_configyml">Adding a <code class="language-plaintext highlighter-rouge">_config.yml</code></h3>
+
+<p>First, we’ll need to add a <code class="language-plaintext highlighter-rouge">_config.yml</code> at the root directory. This is the Jekyll configuration file. In here, we will set the site’s title, theme, repository and permalink options, and also tell Jekyll what plugins to use:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># _config.yml</span>
+<span class="na">title</span><span class="pi">:</span> <span class="s">Foam</span>
+<span class="c1"># All the plugins we will be installing now that we won't be using GitHub Pages</span>
+<span class="na">plugins</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s">jekyll-katex</span>  <span class="c1"># optional</span>
+  <span class="pi">-</span> <span class="s">jekyll-default-layout</span>
+  <span class="pi">-</span> <span class="s">jekyll-relative-links</span>
+  <span class="pi">-</span> <span class="s">jekyll-readme-index</span>
+  <span class="pi">-</span> <span class="s">jekyll-titles-from-headings</span>
+  <span class="pi">-</span> <span class="s">jekyll-optional-front-matter</span>
+<span class="c1"># The default Jekyll theme we will be using</span>
+<span class="na">theme</span><span class="pi">:</span> <span class="s">jekyll-theme-primer</span>
+<span class="c1"># The GitHub repository that we are hosting our foam workspace from</span>
+<span class="na">repository</span><span class="pi">:</span> <span class="s">user/repo</span>
+<span class="c1"># Generate permalinks in format specified in: https://jekyllrb.com/docs/permalinks/#built-in-formats</span>
+<span class="na">permalink</span><span class="pi">:</span> <span class="s">pretty</span>
+</code></pre></div></div>
+
+<p>The <code class="language-plaintext highlighter-rouge">theme</code> specifies a theme for our deployed Jekyll website. The default GitHub Pages template is called <a href="https://github.com/pages-themes/primer">Primer</a>. See Primer docs for how to customise html layouts and templates. We can also choose a theme if you want from places like <a href="https://jekyllthemes.io/">Jekyll Themes</a>.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">plugins</code> specifies a list of Jekyll plugins that we will be installing in the next section. As we won’t be using GitHub Pages, we’ll need to install these plugins that GitHub Pages installs for us under the hood.</p>
+
+<p><em>If you want to use LaTeX rendered with KaTeX (which is what the plugin <code class="language-plaintext highlighter-rouge">jekyll-katex</code> does), you can specify it here. And yes, one of the benefits of deploying with Vercel is that we can use KaTeX to render LaTeX! More on: [[math-support-with-katex]]</em></p>
+
+<h3 id="adding-a-gemfile">Adding a <code class="language-plaintext highlighter-rouge">Gemfile</code></h3>
+
+<p>Next up, we’ll create another new file called <code class="language-plaintext highlighter-rouge">Gemfile</code> in the root directory. This is where we will let Vercel know what plugins to install when building our website.</p>
+
+<p>In our <code class="language-plaintext highlighter-rouge">Gemfile</code>, we need to specify our Ruby packages:</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Gemfile</span>
+<span class="n">source</span> <span class="s2">"https://rubygems.org"</span>
+<span class="n">gem</span> <span class="s2">"jekyll"</span>
+<span class="n">gem</span> <span class="s2">"kramdown-parser-gfm"</span>
+<span class="n">gem</span> <span class="s2">"jekyll-theme-primer"</span>
+<span class="n">gem</span> <span class="s2">"jekyll-optional-front-matter"</span>
+<span class="n">gem</span> <span class="s2">"jekyll-default-layout"</span>
+<span class="n">gem</span> <span class="s2">"jekyll-relative-links"</span>
+<span class="n">gem</span> <span class="s2">"jekyll-readme-index"</span>
+<span class="n">gem</span> <span class="s2">"jekyll-titles-from-headings"</span>
+<span class="n">gem</span> <span class="s2">"jekyll-katex"</span>  <span class="c1"># Optional, the package that enables KaTeX math rendering</span>
+</code></pre></div></div>
+
+<h3 id="enable-math-rendering-with-katex-optional">Enable math rendering with KaTeX (optional)</h3>
+
+<p>Besides adding the plugin <code class="language-plaintext highlighter-rouge">jekyll-katex</code> in <code class="language-plaintext highlighter-rouge">_config.yml</code> and <code class="language-plaintext highlighter-rouge">Gemfile</code>, we’ll also have to follow the guides in [[math-support-with-katex]] to let our site fully support using KaTeX to render math equations.</p>
+
+<h3 id="committing-changes-to-github-repo">Committing changes to GitHub repo</h3>
+
+<p>Finally, commit the newly created files to GitHub.</p>
+
+<h2 id="importing-project-to-vercel">Importing project to Vercel</h2>
+
+<p>First, import our foam workspace (GitHub repository) to Vercel with <a href="https://vercel.com/import/git">Vercel’s <em>Import Git Repository</em></a>. Paste our GitHub repo’s url and Vercel will automatically pull and analyze the tool we use to deploy our website. (In our case: Jekyll.)</p>
+
+<p>Next, select the folder to deploy from if prompted. If we are using the default template, then Vercel will default to the root directory of our Foam workspace.</p>
+
+<p>Finally, if all is successful, Vercel will show the detected framework: Jekyll. Press <code class="language-plaintext highlighter-rouge">Deploy</code> to proceed on publishing our project.</p>
+
+<p><img src="/assets/images/vercel-detect-preset.png" alt="" /></p>
+
+<p>And now, Vercel will take care of building and rendering our foam workspace each time on push. Vercel will publish our site to <code class="language-plaintext highlighter-rouge">xxx.vercel.app</code>, we can also define a custom domain name for our Vercel website.</p>
+
+
+
+<script type="text/javascript">
+  // Hack: Replace page-link with "Page Title"
+  document.querySelectorAll(".markdown-body a[title]").forEach((a) => {
+    a.innerText = a.title;
+  });
+  // Hack: Remove .md extension from wikilinks to get the html in jekyll
+  document.querySelectorAll("a").forEach(l => {
+    if (l.href.endsWith('.md')) {
+      l.href = l.href.substring(0, l.href.length-3)
+    }
+  })
+</script>
+
+
+      
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.0/anchor.min.js" integrity="sha256-lZaRhKri35AyJSypXXs4o6OPFTbTmUoltBbDCbdzegg=" crossorigin="anonymous"></script>
+    <script>anchors.add();</script>
+  </body>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Generate a site using Gatsby | About these notes</title>
+<meta name="generator" content="Jekyll v4.3.3" />
+<meta property="og:title" content="Generate a site using Gatsby" />
+<meta property="og:locale" content="en_US" />
+<link rel="canonical" href="http://localhost:4000/docs/publishing/generate-gatsby-site/" />
+<meta property="og:url" content="http://localhost:4000/docs/publishing/generate-gatsby-site/" />
+<meta property="og:site_name" content="About these notes" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Generate a site using Gatsby" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","headline":"Generate a site using Gatsby","url":"http://localhost:4000/docs/publishing/generate-gatsby-site/"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <link rel="stylesheet" href="/assets/css/style.css?v=5e25ebfb6b5b6991017cbe8f9120d8b49deb4732">
+    <!-- start custom head snippets, customize with your own _includes/head-custom.html file -->
+
+<!-- Setup Google Analytics -->
+
+
+
+<!-- You can set your favicon here -->
+<!-- link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" -->
+
+<!-- end custom head snippets -->
+
+  </head>
+  <body>
+    <div class="container-lg px-3 my-5 markdown-body">
+      
+      <h1><a href="http://localhost:4000/">About these notes</a></h1>
+      
+
+      <h1 id="generate-a-site-using-gatsby">Generate a site using Gatsby</h1>
+
+<h2 id="using-foam-gatsby-template">Using foam-gatsby-template</h2>
+
+<p>You can use <a href="https://github.com/mathieudutour/foam-gatsby-template">foam-gatsby-template</a> to generate a static site to host it online on GitHub or <a href="https://vercel.com">Vercel</a>.</p>
+
+<h3 id="publishing-your-foam-to-github-pages">Publishing your foam to GitHub pages</h3>
+
+<p>It comes configured with GitHub actions to auto deploy to GitHub pages when changes are pushed to your main branch.</p>
+
+<h3 id="publishing-your-foam-to-vercel">Publishing your foam to Vercel</h3>
+
+<p>When you’re ready to publish, run a local build.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd </span>_layouts
+npm run build
+</code></pre></div></div>
+
+<p>Remove <code class="language-plaintext highlighter-rouge">public</code> from your .gitignore file then commit and push your public folder in <code class="language-plaintext highlighter-rouge">_layouts</code> to GitHub.</p>
+
+<p>Log into your Vercel account. (Create one if you don’t have it already.)</p>
+
+<p>Import your project. Select <code class="language-plaintext highlighter-rouge">_layouts/public</code> as your root directory and click <strong>Continue</strong>. Then name your project and click <strong>Deploy</strong>.</p>
+
+<p>That’s it!</p>
+
+<h2 id="using-foam-template-gatsby-kb">Using foam-template-gatsby-kb</h2>
+
+<p>You can use another template <a href="https://github.com/hikerpig/foam-template-gatsby-kb">foam-template-gatsby-kb</a>, and host it on <a href="https://vercel.com">Vercel</a> or <a href="https://www.netlify.com/">Netlify</a>.</p>
+
+<h2 id="using-foam-template-gatsby-theme-primer-wiki">Using foam-template-gatsby-theme-primer-wiki</h2>
+
+<p>You can use another template <a href="https://github.com/theowenyoung/foam-template-gatsby-theme-primer-wiki">foam-template-gatsby-theme-primer-wiki</a>, (<a href="https://demo-wiki.owenyoung.com/">Demo</a>), and host it on Github Pages, <a href="https://vercel.com">Vercel</a> or <a href="https://www.netlify.com/">Netlify</a>.</p>
+
+
+<script type="text/javascript">
+  // Hack: Replace page-link with "Page Title"
+  document.querySelectorAll(".markdown-body a[title]").forEach((a) => {
+    a.innerText = a.title;
+  });
+  // Hack: Remove .md extension from wikilinks to get the html in jekyll
+  document.querySelectorAll("a").forEach(l => {
+    if (l.href.endsWith('.md')) {
+      l.href = l.href.substring(0, l.href.length-3)
+    }
+  })
+</script>
+
+
+      
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.0/anchor.min.js" integrity="sha256-lZaRhKri35AyJSypXXs4o6OPFTbTmUoltBbDCbdzegg=" crossorigin="anonymous"></script>
+    <script>anchors.add();</script>
+  </body>
+</html>

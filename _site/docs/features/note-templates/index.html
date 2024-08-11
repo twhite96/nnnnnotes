@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Note Templates | About these notes</title>
+<meta name="generator" content="Jekyll v4.3.3" />
+<meta property="og:title" content="Note Templates" />
+<meta property="og:locale" content="en_US" />
+<link rel="canonical" href="http://localhost:4000/docs/features/note-templates/" />
+<meta property="og:url" content="http://localhost:4000/docs/features/note-templates/" />
+<meta property="og:site_name" content="About these notes" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Note Templates" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","headline":"Note Templates","url":"http://localhost:4000/docs/features/note-templates/"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <link rel="stylesheet" href="/assets/css/style.css?v=5e25ebfb6b5b6991017cbe8f9120d8b49deb4732">
+    <!-- start custom head snippets, customize with your own _includes/head-custom.html file -->
+
+<!-- Setup Google Analytics -->
+
+
+
+<!-- You can set your favicon here -->
+<!-- link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" -->
+
+<!-- end custom head snippets -->
+
+  </head>
+  <body>
+    <div class="container-lg px-3 my-5 markdown-body">
+      
+      <h1><a href="http://localhost:4000/">About these notes</a></h1>
+      
+
+      <h1 id="note-templates">Note Templates</h1>
+
+<p>Foam supports note templates which let you customize the starting content of your notes instead of always starting from an empty note.</p>
+
+<p>Note templates are <code class="language-plaintext highlighter-rouge">.md</code> files located in the special <code class="language-plaintext highlighter-rouge">.foam/templates</code> directory of your workspace.</p>
+
+<h2 id="quickstart">Quickstart</h2>
+
+<p>Create a template:</p>
+
+<ul>
+  <li>Run the <code class="language-plaintext highlighter-rouge">Foam: Create New Template</code> command from the command palette</li>
+  <li>OR manually create a regular <code class="language-plaintext highlighter-rouge">.md</code> file in the <code class="language-plaintext highlighter-rouge">.foam/templates</code> directory</li>
+</ul>
+
+<p><img src="/assets/images/create-new-template.gif" alt="Create new template GIF" /></p>
+
+<p><em>Theme: Ayu Light</em></p>
+
+<p>To create a note from a template:</p>
+
+<ul>
+  <li>Run the <code class="language-plaintext highlighter-rouge">Foam: Create New Note From Template</code> command and follow the instructions. Don’t worry if you’ve not created a template yet! You’ll be prompted to create a new template if none exist.</li>
+  <li>OR run the <code class="language-plaintext highlighter-rouge">Foam: Create New Note</code> command, which uses the special default template (<code class="language-plaintext highlighter-rouge">.foam/templates/new-note.md</code>, if it exists)</li>
+</ul>
+
+<p><img src="/assets/images/create-new-note-from-template.gif" alt="Create new note from template GIF" /></p>
+
+<p><em>Theme: Ayu Light</em></p>
+
+<h2 id="special-templates">Special templates</h2>
+
+<h3 id="default-template">Default template</h3>
+
+<p>The <code class="language-plaintext highlighter-rouge">.foam/templates/new-note.md</code> template is special in that it is the template that will be used by the <code class="language-plaintext highlighter-rouge">Foam: Create New Note</code> command.
+Customize this template to contain content that you want included every time you create a note. To begin it is <em>recommended</em> to define the YAML Front-Matter of the template similar to the following:</p>
+
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
+<span class="na">type</span><span class="pi">:</span> <span class="s">basic-note</span>
+<span class="nn">---</span>
+</code></pre></div></div>
+
+<h3 id="default-daily-note-template">Default daily note template</h3>
+
+<p>The <code class="language-plaintext highlighter-rouge">.foam/templates/daily-note.md</code> template is special in that it is the template that will be used when creating daily notes (e.g. by using <code class="language-plaintext highlighter-rouge">Foam: Open Daily Note</code>).
+Customize this template to contain content that you want included every time you create a daily note. To begin it is <em>recommended</em> to define the YAML Front-Matter of the template similar to the following:</p>
+
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
+<span class="na">type</span><span class="pi">:</span> <span class="s">daily-note</span>
+<span class="nn">---</span>
+</code></pre></div></div>
+
+<h2 id="variables">Variables</h2>
+
+<p>Templates can use all the variables available in <a href="https://code.visualstudio.com/docs/editor/userdefinedsnippets#_variables">VS Code Snippets</a>.</p>
+
+<p>In addition, you can also use variables provided by Foam:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">FOAM_SELECTED_TEXT</code></td>
+      <td>Foam will fill it with selected text when creating a new note, if any text is selected. Selected text will be replaced with a wikilink to the new</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">FOAM_TITLE</code></td>
+      <td>The title of the note. If used, Foam will prompt you to enter a title for the note.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">FOAM_TITLE_SAFE</code></td>
+      <td>The title of the note in a file system safe format. If used, Foam will prompt you to enter a title for the note unless <code class="language-plaintext highlighter-rouge">FOAM_TITLE</code> has already caused the prompt.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">FOAM_SLUG</code></td>
+      <td>The sluggified title of the note (using the default github slug method). If used, Foam will prompt you to enter a title for the note unless <code class="language-plaintext highlighter-rouge">FOAM_TITLE</code> has already caused the prompt.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">FOAM_DATE_*</code></td>
+      <td><code class="language-plaintext highlighter-rouge">FOAM_DATE_YEAR</code>, <code class="language-plaintext highlighter-rouge">FOAM_DATE_MONTH</code>, <code class="language-plaintext highlighter-rouge">FOAM_DATE_WEEK</code> etc. Foam-specific versions of <a href="https://code.visualstudio.com/docs/editor/userdefinedsnippets#_variables">VS Code’s datetime snippet variables</a>. Prefer these versions over VS Code’s.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="foam_date_-variables"><code class="language-plaintext highlighter-rouge">FOAM_DATE_*</code> variables</h3>
+
+<p>Foam defines its own set of datetime variables that have a similar behaviour as <a href="https://code.visualstudio.com/docs/editor/userdefinedsnippets#_variables">VS Code’s datetime snippet variables</a>.</p>
+
+<p>For example, <code class="language-plaintext highlighter-rouge">FOAM_DATE_YEAR</code> has the same behaviour as VS Code’s <code class="language-plaintext highlighter-rouge">CURRENT_YEAR</code>, <code class="language-plaintext highlighter-rouge">FOAM_DATE_SECONDS_UNIX</code> has the same behaviour as <code class="language-plaintext highlighter-rouge">CURRENT_SECONDS_UNIX</code>, etc.</p>
+
+<p>By default, prefer using the <code class="language-plaintext highlighter-rouge">FOAM_DATE_</code> versions. The datetime used to compute the values will be the same for both <code class="language-plaintext highlighter-rouge">FOAM_DATE_</code> and VS Code’s variables, with the exception of the creation notes using the daily note template.</p>
+
+<p>For more nitty-gritty details about the supported date formats, <a href="https://github.com/foambubble/foam/blob/master/packages/foam-vscode/src/services/variable-resolver.ts">see here</a>.</p>
+
+<h4 id="relative-daily-notes">Relative daily notes</h4>
+
+<p>When referring to daily notes, you can use the relative snippets (<code class="language-plaintext highlighter-rouge">/+1d</code>, <code class="language-plaintext highlighter-rouge">/tomorrow</code>, etc.). In these cases, the new notes will be created with the daily note template, but the datetime used should be the relative datetime, not the current datetime.
+By using the <code class="language-plaintext highlighter-rouge">FOAM_DATE_</code> versions of the variables, the correct relative date will populate the variables, instead of the current datetime.</p>
+
+<p>For example, given this daily note template (<code class="language-plaintext highlighter-rouge">.foam/templates/daily-note.md</code>):</p>
+
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh"># $FOAM_DATE_YEAR-$FOAM_DATE_MONTH-$FOAM_DATE_DATE</span>
+
+<span class="gu">## Here's what I'm going to do today</span>
+<span class="p">
+*</span> Thing 1
+<span class="p">*</span> Thing 2
+</code></pre></div></div>
+
+<p>When the <code class="language-plaintext highlighter-rouge">/tomorrow</code> snippet is used, <code class="language-plaintext highlighter-rouge">FOAM_DATE_</code> variables will be populated with tomorrow’s date, as expected.
+If instead you were to use the VS Code versions of these variables, they would be populated with today’s date, not tomorrow’s, causing unexpected behaviour.</p>
+
+<p>When creating notes in any other scenario, the <code class="language-plaintext highlighter-rouge">FOAM_DATE_</code> values are computed using the same datetime as the VS Code ones, so the <code class="language-plaintext highlighter-rouge">FOAM_DATE_</code> versions can be used in all scenarios by default.</p>
+
+<h2 id="metadata">Metadata</h2>
+
+<p>Templates can also contain metadata about the templates themselves. The metadata is defined in YAML “Frontmatter” blocks within the templates.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">filepath</code></td>
+      <td>The filepath to use when creating the new note. If the filepath is a relative filepath, it is relative to the current workspace.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">name</code></td>
+      <td>A human readable name to show in the template picker.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">description</code></td>
+      <td>A human readable description to show in the template picker.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Foam-specific variables (e.g. <code class="language-plaintext highlighter-rouge">$FOAM_TITLE</code>) can be used within template metadata. However, VS Code snippet variables are (<a href="https://github.com/foambubble/foam/pull/655">currently</a>) not supported.</p>
+
+<h3 id="filepath-attribute"><code class="language-plaintext highlighter-rouge">filepath</code> attribute</h3>
+
+<p>The <code class="language-plaintext highlighter-rouge">filepath</code> metadata attribute allows you to define a relative or absolute filepath to use when creating a note using the template. If the filepath is a relative filepath, it is relative to the current workspace.</p>
+
+<h4 id="example-of-relative-filepath">Example of <strong>relative</strong> <code class="language-plaintext highlighter-rouge">filepath</code></h4>
+
+<p>For example, <code class="language-plaintext highlighter-rouge">filepath</code> can be used to customize <code class="language-plaintext highlighter-rouge">.foam/templates/new-note.md</code>, overriding the default <code class="language-plaintext highlighter-rouge">Foam: Create New Note</code> behaviour of opening the file in the same directory as the active file:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
+<span class="c1"># This will create the note in the "journal" subdirectory of the current workspace,</span>
+<span class="c1"># regardless of which file is the active file.</span>
+<span class="na">foam_template</span><span class="pi">:</span>
+  <span class="na">filepath</span><span class="pi">:</span> <span class="s1">'</span><span class="s">journal/$FOAM_TITLE.md'</span>
+<span class="nn">---</span>
+</code></pre></div></div>
+
+<h4 id="example-of-absolute-filepath">Example of <strong>absolute</strong> <code class="language-plaintext highlighter-rouge">filepath</code></h4>
+
+<p><code class="language-plaintext highlighter-rouge">filepath</code> can be an absolute filepath, so that the notes get created in the same location, regardless of which file or workspace the editor currently has open.
+The format of an absolute filepath may vary depending on the filesystem used.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
+<span class="na">foam_template</span><span class="pi">:</span>
+  <span class="c1"># Unix / MacOS filesystems</span>
+  <span class="na">filepath</span><span class="pi">:</span> <span class="s1">'</span><span class="s">/Users/john.smith/foam/journal/$FOAM_TITLE.md'</span>
+
+  <span class="c1"># Windows filesystems</span>
+  <span class="na">filepath</span><span class="pi">:</span> <span class="s1">'</span><span class="s">C:\Users\john.smith\Documents\foam\journal\$FOAM_TITLE.md'</span>
+<span class="nn">---</span>
+</code></pre></div></div>
+
+<h4 id="example-of-date-based-filepath">Example of <strong>date-based</strong> <code class="language-plaintext highlighter-rouge">filepath</code></h4>
+
+<p>It is possible to vary the <code class="language-plaintext highlighter-rouge">filepath</code> value based on the current date using the <code class="language-plaintext highlighter-rouge">FOAM_DATE_*</code> variables. This is especially useful for the [[daily-notes]] template if you wish to organize by years, months, etc. Below is an example of a daily-note template metadata section that will create new daily notes under the <code class="language-plaintext highlighter-rouge">journal/YEAR/MONTH-MONTH_NAME/</code> filepath. For example, when a note is created on November 15, 2022, a new file will be created at <code class="language-plaintext highlighter-rouge">C:\Users\foam_user\foam_notes\journal\2022\11-Nov\2022-11-15-daily-note.md</code>. This method also respects the creation of daily notes relative to the current date (i.e. <code class="language-plaintext highlighter-rouge">/+1d</code>).</p>
+
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
+<span class="na">type</span><span class="pi">:</span> <span class="s">daily-note</span>
+<span class="na">foam_template</span><span class="pi">:</span>
+    <span class="na">description</span><span class="pi">:</span> <span class="s">Daily Note for $FOAM_TITLE</span>
+    <span class="na">filepath</span><span class="pi">:</span> <span class="s2">"</span><span class="s">C:</span><span class="se">\\</span><span class="s">Users</span><span class="se">\\</span><span class="s">foam_user</span><span class="se">\\</span><span class="s">foam_notes</span><span class="se">\\</span><span class="s">journal</span><span class="se">\\</span><span class="s">$FOAM_DATE_YEAR</span><span class="se">\\</span><span class="s">$FOAM_DATE_MONTH-$FOAM_DATE_MONTH_NAME_SHORT</span><span class="se">\\</span><span class="s">$FOAM_DATE_YEAR-$FOAM_DATE_MONTH-$FOAM_DATE_DATE-daily-note.md"</span>
+<span class="nn">---</span>
+<span class="gh"># $FOAM_DATE_YEAR-$FOAM_DATE_MONTH-$FOAM_DATE_DATE Daily Notes</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p>Note: this method <strong>requires</strong> the use of absolute file paths, and in this example is using Windows path conventions. This method will also override any filename formatting defined in <code class="language-plaintext highlighter-rouge">.vscode/settings.json</code></p>
+</blockquote>
+
+<h3 id="name-and-description-attributes"><code class="language-plaintext highlighter-rouge">name</code> and <code class="language-plaintext highlighter-rouge">description</code> attributes</h3>
+
+<p>These attributes provide a human readable name and description to be shown in the template picker (e.g. When a user uses the <code class="language-plaintext highlighter-rouge">Foam: Create New Note From Template</code> command):</p>
+
+<p><img src="/assets/images/template-picker-annotated.png" alt="Template Picker annotated with attributes" /></p>
+
+<h3 id="adding-template-metadata-to-an-existing-yaml-frontmatter-block">Adding template metadata to an existing YAML Frontmatter block</h3>
+
+<p>If your template already has a YAML Frontmatter block, you can add the Foam template metadata to it.</p>
+
+<h4 id="limitations">Limitations</h4>
+
+<p>Foam only supports adding the template metadata to <em>YAML</em> Frontmatter blocks. If the existing Frontmatter block uses some other format (e.g. JSON), you will have to add the template metadata to its own YAML Frontmatter block.</p>
+
+<p>Further, the template metadata must be provided as a <a href="https://yaml.org/spec/1.2/spec.html#id2798057">YAML block mapping</a>, with the attributes placed on the lines immediately following the <code class="language-plaintext highlighter-rouge">foam_template</code> line:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
+<span class="na">existing_frontmatter</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Existing</span><span class="nv"> </span><span class="s">Frontmatter</span><span class="nv"> </span><span class="s">block"</span>
+<span class="na">foam_template</span><span class="pi">:</span> <span class="c1"># this is a YAML "Block" mapping ("Flow" mappings aren't supported)</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">My Note Template</span> <span class="c1"># Attributes must be on the lines immediately following `foam_template`</span>
+  <span class="na">description</span><span class="pi">:</span> <span class="s">This is my note template</span>
+  <span class="na">filepath</span><span class="pi">:</span> <span class="err">`</span><span class="s">journal/$FOAM_TITLE.md`</span>
+<span class="nn">---</span>
+<span class="s">This is the rest of the template</span>
+</code></pre></div></div>
+
+<p>Due to the technical limitations of parsing the complex YAML format, unless the metadata is provided this specific form, Foam is unable to correctly remove the template metadata before creating the resulting note.</p>
+
+<p>If this limitation proves inconvenient to you, please let us know. We may be able to extend our parsing capabilities to cover your use case. In the meantime, you can add the template metadata without this limitation by providing it in its own YAML Frontmatter block.</p>
+
+<h3 id="adding-template-metadata-to-its-own-yaml-frontmatter-block">Adding template metadata to its own YAML Frontmatter block</h3>
+
+<p>You can add the template metadata to its own YAML Frontmatter block at the start of the template:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
+<span class="na">foam_template</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">My Note Template</span>
+  <span class="na">description</span><span class="pi">:</span> <span class="s">This is my note template</span>
+  <span class="na">filepath</span><span class="pi">:</span> <span class="s1">'</span><span class="s">journal/$FOAM_TITLE.md'</span>
+<span class="nn">---</span>
+<span class="s">This is the rest of the template</span>
+</code></pre></div></div>
+
+<p>If the note already has a Frontmatter block, a Foam-specific Frontmatter block can be added to the start of the template. The Foam-specific Frontmatter block must always be placed at the very beginning of the file, and only whitespace can separate the two Frontmatter blocks.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
+<span class="na">foam_template</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">My Note Template</span>
+  <span class="na">description</span><span class="pi">:</span> <span class="s">This is my note template</span>
+  <span class="na">filepath</span><span class="pi">:</span> <span class="s1">'</span><span class="s">journal/$FOAM_TITLE.md'</span>
+<span class="nn">---</span>
+
+<span class="nn">---</span>
+<span class="na">existing_frontmatter</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Existing</span><span class="nv"> </span><span class="s">Frontmatter</span><span class="nv"> </span><span class="s">block"</span>
+<span class="nn">---</span>
+<span class="s">This is the rest of the template</span>
+</code></pre></div></div>
+
+
+
+<script type="text/javascript">
+  // Hack: Replace page-link with "Page Title"
+  document.querySelectorAll(".markdown-body a[title]").forEach((a) => {
+    a.innerText = a.title;
+  });
+  // Hack: Remove .md extension from wikilinks to get the html in jekyll
+  document.querySelectorAll("a").forEach(l => {
+    if (l.href.endsWith('.md')) {
+      l.href = l.href.substring(0, l.href.length-3)
+    }
+  })
+</script>
+
+
+      
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.0/anchor.min.js" integrity="sha256-lZaRhKri35AyJSypXXs4o6OPFTbTmUoltBbDCbdzegg=" crossorigin="anonymous"></script>
+    <script>anchors.add();</script>
+  </body>
+</html>

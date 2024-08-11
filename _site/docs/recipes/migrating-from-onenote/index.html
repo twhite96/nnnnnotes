@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Migrating from OneNote | About these notes</title>
+<meta name="generator" content="Jekyll v4.3.3" />
+<meta property="og:title" content="Migrating from OneNote" />
+<meta property="og:locale" content="en_US" />
+<link rel="canonical" href="http://localhost:4000/docs/recipes/migrating-from-onenote/" />
+<meta property="og:url" content="http://localhost:4000/docs/recipes/migrating-from-onenote/" />
+<meta property="og:site_name" content="About these notes" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Migrating from OneNote" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","headline":"Migrating from OneNote","url":"http://localhost:4000/docs/recipes/migrating-from-onenote/"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <link rel="stylesheet" href="/assets/css/style.css?v=5e25ebfb6b5b6991017cbe8f9120d8b49deb4732">
+    <!-- start custom head snippets, customize with your own _includes/head-custom.html file -->
+
+<!-- Setup Google Analytics -->
+
+
+
+<!-- You can set your favicon here -->
+<!-- link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" -->
+
+<!-- end custom head snippets -->
+
+  </head>
+  <body>
+    <div class="container-lg px-3 my-5 markdown-body">
+      
+      <h1><a href="http://localhost:4000/">About these notes</a></h1>
+      
+
+      <h1 id="migrating-from-onenote">Migrating from OneNote</h1>
+
+<p>This guide mostly duplicates the instructions at the repo for the PowerShell <a href="https://github.com/nixsee/ConvertOneNote2MarkDown">script</a>.</p>
+
+<h2 id="summary">Summary</h2>
+
+<p>The powershell script ‘ConvertOneNote2MarkDown-v2.ps1’ will utilize the OneNote Object Model on your workstation to convert all OneNote pages to Word documents and then utilizes PanDoc to convert the Word documents to Markdown (.md) format. It will also:</p>
+
+<ul>
+  <li>Create a folder structure for your Notebooks and Sections.</li>
+  <li>Process pages that are in sections at the Notebook, Section Group and 1st Nested Section Group levels.</li>
+  <li>Allow you you choose between putting all Images in a central ‘/media’ folder for each notebook, or in a separate ‘/media’ folder in each folder of the hierarchy.</li>
+  <li>Fix image references in the resulting .md files, generating relative references to the image files within the markdown document.</li>
+  <li>A title, description, and date header will be added to each file as well.</li>
+  <li>And more (see details at repo)!</li>
+</ul>
+
+<h2 id="usage">Usage</h2>
+
+<ol>
+  <li>Start the OneNote application. All notebooks currently loaded in <a href="https://getonetastic.com/download">OneNote</a> will be converted.</li>
+  <li>It is advised that you install <a href="https://getonetastic.com/download">Onetastic</a> and the attached macro, which will automatically expand any collapsed paragraphs in the notebook. They won’t be exported otherwise.
+    <ul>
+      <li>To install the macro, click the New Macro Button within the Onetastic Toolbar and then select File -&gt; Import and select the .xml macro included in the release.</li>
+      <li>Run the macro for each Notebook that is open</li>
+    </ul>
+  </li>
+  <li>For the next sections, it is highly recommended that you use VS Code, and its embedded PowerShell terminal, as this allows you to edit and run the script, as well as check the results of the .md output all in one window.</li>
+  <li>Whatever you choose, you will need to do the following:
+    <ol>
+      <li>Clone the script to your computer (see <a href="https://git-scm.com/book/en/v2/Git-Basics-Getting-a-Git-Repository">here</a>, if you’re unfamiliar with git).</li>
+      <li>Once cloned, navigate to the repo folder. In VS Code, use File -&gt; Add Folder to Workspace, right click on the folder in the left side bar and click <a href="/assets/images/migrating-one-note.png">Open In Integrated Terminal</a>.</li>
+      <li>Run the script by executing
+<code class="language-plaintext highlighter-rouge">.\ConvertOnenote2Markdown-v2</code>
+        <ul>
+          <li>if you receive an error, try running this line to bypass security:
+  <code class="language-plaintext highlighter-rouge">Set-ExecutionPolicy Bypass -Scope Process</code></li>
+          <li>if you still have trouble, try running both Onenote and Powershell as an administrator.</li>
+        </ul>
+      </li>
+    </ol>
+  </li>
+  <li>It will ask you for the path to store the markdown folder structure. Please use an empty folder. If using VS Code, you might not be able to paste the filepath - right click on the blinking cursor and it will paste from clipboard. <strong>Attention:</strong> use a full absolute path for the destination.</li>
+  <li>Read the prompts carefully to select your desired options. If you aren’t actively editing your pages in Onenote, it is HIGHLY recommended that you don’t delete the intermediate word docs, as they take 80+% of the time to generate. They are stored in their own folder, out of the way. You can then quickly re-run the script with different parameters until you find what you like.</li>
+  <li>Sit back and wait until the process completes.</li>
+  <li>To stop the process at any time, press Ctrl+C.</li>
+  <li>If you like, you can inspect some of the .md files prior to completion. If you’re not happy with the results, stop the process, delete the .md and re-run with different parameters.</li>
+  <li>At this point, you should be ready to load the new directory into Foam!</li>
+</ol>
+
+
+<script type="text/javascript">
+  // Hack: Replace page-link with "Page Title"
+  document.querySelectorAll(".markdown-body a[title]").forEach((a) => {
+    a.innerText = a.title;
+  });
+  // Hack: Remove .md extension from wikilinks to get the html in jekyll
+  document.querySelectorAll("a").forEach(l => {
+    if (l.href.endsWith('.md')) {
+      l.href = l.href.substring(0, l.href.length-3)
+    }
+  })
+</script>
+
+
+      
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.0/anchor.min.js" integrity="sha256-lZaRhKri35AyJSypXXs4o6OPFTbTmUoltBbDCbdzegg=" crossorigin="anonymous"></script>
+    <script>anchors.add();</script>
+  </body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Resource Filters | About these notes</title>
+<meta name="generator" content="Jekyll v4.3.3" />
+<meta property="og:title" content="Resource Filters" />
+<meta property="og:locale" content="en_US" />
+<link rel="canonical" href="http://localhost:4000/docs/features/resource-filters/" />
+<meta property="og:url" content="http://localhost:4000/docs/features/resource-filters/" />
+<meta property="og:site_name" content="About these notes" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Resource Filters" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","headline":"Resource Filters","url":"http://localhost:4000/docs/features/resource-filters/"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <link rel="stylesheet" href="/assets/css/style.css?v=5e25ebfb6b5b6991017cbe8f9120d8b49deb4732">
+    <!-- start custom head snippets, customize with your own _includes/head-custom.html file -->
+
+<!-- Setup Google Analytics -->
+
+
+
+<!-- You can set your favicon here -->
+<!-- link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" -->
+
+<!-- end custom head snippets -->
+
+  </head>
+  <body>
+    <div class="container-lg px-3 my-5 markdown-body">
+      
+      <h1><a href="http://localhost:4000/">About these notes</a></h1>
+      
+
+      <h1 id="resource-filters">Resource Filters</h1>
+
+<p>Resource filters can be passed to some Foam commands to limit their scope.</p>
+
+<p>A filter supports the following parameters:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">tag</code>: include a resource if it has the given tag (e.g. <code class="language-plaintext highlighter-rouge">{"tag": "#research"}</code>)</li>
+  <li><code class="language-plaintext highlighter-rouge">type</code>: include a resource if it is of the given type (e.g. <code class="language-plaintext highlighter-rouge">{"type": "daily-note"}</code>)</li>
+  <li><code class="language-plaintext highlighter-rouge">path</code>: include a resource if its path matches the given regex (e.g. <code class="language-plaintext highlighter-rouge">{"path": "/projects/*"}</code>). <strong>Note that this parameter supports regex and not globs.</strong></li>
+  <li><code class="language-plaintext highlighter-rouge">expression</code>: include a resource if it makes the given expression <code class="language-plaintext highlighter-rouge">true</code>, where <code class="language-plaintext highlighter-rouge">resource</code> represents the resource being evaluated (e.g. <code class="language-plaintext highlighter-rouge">{"expression": "resource.type ==='weekly-note'"}</code>)</li>
+  <li><code class="language-plaintext highlighter-rouge">title</code>: include a resource if the title matches the given regex (e.g. <code class="language-plaintext highlighter-rouge">{"title": "Team meeting:*"}</code>)</li>
+</ul>
+
+<p>A filter also supports some logical operators:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">and</code>: include a resource if it matches all the sub-parameters (e.g <code class="language-plaintext highlighter-rouge">{"and": [{"tag": "#research"}, {"title": "Paper *"}]}</code>)</li>
+  <li><code class="language-plaintext highlighter-rouge">or</code>: include a resource if it matches any of the sub-parameters (e.g <code class="language-plaintext highlighter-rouge">{"or": [{"tag": "#research"}, {"title": "Paper *"}]}</code>)</li>
+  <li><code class="language-plaintext highlighter-rouge">not</code>: invert the result of the nested filter (e.g. <code class="language-plaintext highlighter-rouge">{"not": {"type": "daily-note"}}</code>)</li>
+</ul>
+
+<p>Here is an example of a complex filter, for example to show the Foam graph only of a subset of the workspace:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
+  "key": "alt+f",
+  "command": "foam-vscode.show-graph",
+  "args": {
+    "filter": {
+      "and": [
+        {
+          "or": [
+            { "type": 'daily-note' },
+            { "type": 'weekly-note' },
+            { "path": '/projects/*' },
+          ],
+          "not": {
+            { "tag": '#b' },
+          },
+        },
+      ],
+    }
+  }
+}
+</code></pre></div></div>
+
+
+<script type="text/javascript">
+  // Hack: Replace page-link with "Page Title"
+  document.querySelectorAll(".markdown-body a[title]").forEach((a) => {
+    a.innerText = a.title;
+  });
+  // Hack: Remove .md extension from wikilinks to get the html in jekyll
+  document.querySelectorAll("a").forEach(l => {
+    if (l.href.endsWith('.md')) {
+      l.href = l.href.substring(0, l.href.length-3)
+    }
+  })
+</script>
+
+
+      
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.0/anchor.min.js" integrity="sha256-lZaRhKri35AyJSypXXs4o6OPFTbTmUoltBbDCbdzegg=" crossorigin="anonymous"></script>
+    <script>anchors.add();</script>
+  </body>
+</html>

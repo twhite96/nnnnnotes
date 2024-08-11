@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Capture Notes With Drafts Pro | About these notes</title>
+<meta name="generator" content="Jekyll v4.3.3" />
+<meta property="og:title" content="Capture Notes With Drafts Pro" />
+<meta property="og:locale" content="en_US" />
+<link rel="canonical" href="http://localhost:4000/docs/recipes/capture-notes-with-drafts-pro/" />
+<meta property="og:url" content="http://localhost:4000/docs/recipes/capture-notes-with-drafts-pro/" />
+<meta property="og:site_name" content="About these notes" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Capture Notes With Drafts Pro" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","headline":"Capture Notes With Drafts Pro","url":"http://localhost:4000/docs/recipes/capture-notes-with-drafts-pro/"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <link rel="stylesheet" href="/assets/css/style.css?v=5e25ebfb6b5b6991017cbe8f9120d8b49deb4732">
+    <!-- start custom head snippets, customize with your own _includes/head-custom.html file -->
+
+<!-- Setup Google Analytics -->
+
+
+
+<!-- You can set your favicon here -->
+<!-- link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" -->
+
+<!-- end custom head snippets -->
+
+  </head>
+  <body>
+    <div class="container-lg px-3 my-5 markdown-body">
+      
+      <h1><a href="http://localhost:4000/">About these notes</a></h1>
+      
+
+      <h1 id="capture-notes-with-drafts-pro">Capture Notes With Drafts Pro</h1>
+
+<p>With this #recipe you can create notes on your iOS device, which will automatically be imported into Foam.</p>
+
+<h2 id="context">Context</h2>
+
+<ul>
+  <li>You use <a href="https://marketplace.visualstudio.com/items?itemName=foam.foam-vscode">Foam for VSCode</a> to manage your notes</li>
+  <li>You wish to adopt a practice such as <a href="https://notes.andymatuschak.org/A%20writing%20inbox%20for%20transient%20and%20incomplete%20notes">A writing inbox for transient and incomplete notes</a></li>
+  <li>You wish to use <a href="https://docs.getdrafts.com/">Drafts Pro</a> to capture quick notes into your Foam notes from your iOS device</li>
+</ul>
+
+<h2 id="other-tools">Other tools</h2>
+
+<ul>
+  <li>We assume you are familiar with how to use GitHub (if you are using Foam this is implicit)</li>
+  <li>You have an iOS device with <a href="https://getdrafts.com/">Drafts</a></li>
+  <li>You have upgraded to <a href="https://docs.getdrafts.com/draftspro">Drafts Pro</a> (needed to edit actions).</li>
+</ul>
+
+<h2 id="instructions">Instructions</h2>
+
+<ol>
+  <li><a href="https://docs.getdrafts.com/docs/actions/editing-actions">Create a new action in Drafts</a></li>
+  <li>Add a single <a href="https://docs.getdrafts.com/actions/steps/">step</a> of type Script</li>
+  <li>Edit the script adding the code from the block below</li>
+  <li>Edit settings at the top of the script to suit your preferences</li>
+  <li>Set other Action options in Drafts as you wish</li>
+  <li>Save the Action</li>
+  <li>In GitHub <a href="https://github.com/settings/tokens">create a Personal Access Token</a> and give it <code class="language-plaintext highlighter-rouge">repo</code> scope - make a note of the token</li>
+  <li>In Drafts create a note</li>
+  <li>Select the action you created in steps 1-6</li>
+  <li>On the first run you will need to add the following information:
+    <ol>
+      <li>your GitHub username</li>
+      <li>the repository name of your Foam repo</li>
+      <li>the GitHub access token from step 7</li>
+      <li>An author name</li>
+    </ol>
+  </li>
+  <li>Check your GitHub repo for a commit</li>
+  <li>If you are publishing your Foam to the web you may want to edit your publishing configuration to exclude inbox files - as publishing (and method) is a user choice that is beyond the scope of this recipe</li>
+</ol>
+
+<h2 id="code-for-drafts-action">Code for Drafts Action</h2>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// adapted from https://forums.getdrafts.com/t/script-step-post-to-github-without-working-copy/3594</span>
+<span class="c1">// post to writing inbox in Foam digital garden</span>
+
+<span class="cm">/*
+ * edit these lines to suit your preferences
+ */</span>
+<span class="kd">const</span> <span class="nx">inboxFolder</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">inbox/</span><span class="dl">"</span><span class="p">;</span>   <span class="c1">// the folder in your Foam repo where notes are saved. MUST have trailing slash, except for root of repo use ''</span>
+<span class="kd">const</span> <span class="nx">requiredTags</span> <span class="o">=</span> <span class="p">[</span><span class="dl">'</span><span class="s1">inbox</span><span class="dl">'</span><span class="p">];</span> <span class="c1">// all documents will have these added in addition to tags from the Drafts app</span>
+<span class="kd">const</span> <span class="nx">addLinkToInbox</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>    <span class="c1">// true = created note will have link to [[index]], false = no link</span>
+<span class="kd">const</span> <span class="nx">addTimeStamp</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>      <span class="c1">// true = add a note of capture date/time at foot of note</span>
+
+<span class="cm">/*
+ * stop editing
+ */</span>
+
+<span class="kd">const</span> <span class="nx">credential</span> <span class="o">=</span> <span class="nx">Credential</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span><span class="dl">"</span><span class="s2">GitHub garden repo</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">The repo name, and its credentials, hosting your Foam notes</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">credential</span><span class="p">.</span><span class="nf">addTextField</span><span class="p">(</span><span class="dl">"</span><span class="s2">username</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">GitHub Username</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">credential</span><span class="p">.</span><span class="nf">addTextField</span><span class="p">(</span><span class="dl">'</span><span class="s1">repo</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Repo name</span><span class="dl">'</span><span class="p">);</span>
+<span class="nx">credential</span><span class="p">.</span><span class="nf">addPasswordField</span><span class="p">(</span><span class="dl">"</span><span class="s2">key</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">GitHub personal access token</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">credential</span><span class="p">.</span><span class="nf">addTextField</span><span class="p">(</span><span class="dl">'</span><span class="s1">author</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Author</span><span class="dl">'</span><span class="p">);</span>
+<span class="nx">credential</span><span class="p">.</span><span class="nf">authorize</span><span class="p">();</span>
+
+<span class="kd">const</span> <span class="nx">githubKey</span> <span class="o">=</span> <span class="nx">credential</span><span class="p">.</span><span class="nf">getValue</span><span class="p">(</span><span class="dl">'</span><span class="s1">key</span><span class="dl">'</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">githubUser</span> <span class="o">=</span> <span class="nx">credential</span><span class="p">.</span><span class="nf">getValue</span><span class="p">(</span><span class="dl">'</span><span class="s1">username</span><span class="dl">'</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">repo</span> <span class="o">=</span> <span class="nx">credential</span><span class="p">.</span><span class="nf">getValue</span><span class="p">(</span><span class="dl">'</span><span class="s1">repo</span><span class="dl">'</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">author</span> <span class="o">=</span> <span class="nx">credential</span><span class="p">.</span><span class="nf">getValue</span><span class="p">(</span><span class="dl">'</span><span class="s1">author</span><span class="dl">'</span><span class="p">);</span>
+
+<span class="kd">const</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">HTTP</span><span class="p">.</span><span class="nf">create</span><span class="p">();</span> <span class="c1">// create HTTP object</span>
+<span class="kd">const</span> <span class="nx">base</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">https://api.github.com</span><span class="dl">'</span><span class="p">;</span>
+
+
+<span class="kd">const</span> <span class="nx">posttime</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Date</span><span class="p">();</span>
+<span class="kd">const</span> <span class="nx">title</span> <span class="o">=</span> <span class="nx">draft</span><span class="p">.</span><span class="nx">title</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">txt</span> <span class="o">=</span> <span class="nx">draft</span><span class="p">.</span><span class="nf">processTemplate</span><span class="p">(</span><span class="dl">"</span><span class="s2">[[line|3..]]</span><span class="dl">"</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">mergedTags</span> <span class="o">=</span> <span class="p">[...</span><span class="nx">draft</span><span class="p">.</span><span class="nx">tags</span><span class="p">,</span> <span class="p">...</span><span class="nx">requiredTags</span><span class="p">];</span>
+<span class="kd">const</span> <span class="nx">slugbase</span> <span class="o">=</span> <span class="nx">title</span><span class="p">.</span><span class="nf">toLowerCase</span><span class="p">().</span><span class="nf">replace</span><span class="p">(</span><span class="sr">/</span><span class="se">\s</span><span class="sr">/g</span><span class="p">,</span> <span class="dl">"</span><span class="s2">-</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="kd">const</span> <span class="nx">datestr</span> <span class="o">=</span> <span class="s2">`</span><span class="p">${</span><span class="nx">posttime</span><span class="p">.</span><span class="nf">getFullYear</span><span class="p">()}</span><span class="s2">-</span><span class="p">${</span><span class="nf">pad</span><span class="p">(</span><span class="nx">posttime</span><span class="p">.</span><span class="nf">getMonth</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)}</span><span class="s2">-</span><span class="p">${</span><span class="nf">pad</span><span class="p">(</span><span class="nx">posttime</span><span class="p">.</span><span class="nf">getDate</span><span class="p">())}</span><span class="s2">`</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">timestr</span> <span class="o">=</span> <span class="s2">`</span><span class="p">${</span><span class="nf">pad</span><span class="p">(</span><span class="nx">posttime</span><span class="p">.</span><span class="nf">getHours</span><span class="p">())}</span><span class="s2">:</span><span class="p">${</span><span class="nf">pad</span><span class="p">(</span><span class="nx">posttime</span><span class="p">.</span><span class="nf">getMinutes</span><span class="p">())}</span><span class="s2">:00`</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">yr</span> <span class="o">=</span> <span class="s2">`</span><span class="p">${</span><span class="nx">posttime</span><span class="p">.</span><span class="nf">getFullYear</span><span class="p">()}</span><span class="s2">`</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">pdOffset</span> <span class="o">=</span> <span class="nx">posttime</span><span class="p">.</span><span class="nf">getTimezoneOffset</span><span class="p">();</span>
+<span class="kd">const</span> <span class="nx">offsetChar</span> <span class="o">=</span> <span class="nx">pdOffset</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="p">?</span> <span class="dl">'</span><span class="s1">-</span><span class="dl">'</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">+</span><span class="dl">'</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">pdHours</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nf">floor</span><span class="p">(</span><span class="nx">pdOffset</span><span class="o">/</span><span class="mi">60</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nx">pdHours</span><span class="p">);</span>
+<span class="nx">pdHours</span> <span class="o">=</span> <span class="nx">pdHours</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="p">?</span> <span class="nx">pdHours</span> <span class="p">:</span> <span class="nx">pdHours</span> <span class="o">*</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nx">pdHours</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">tzString</span> <span class="o">=</span> <span class="s2">`</span><span class="p">${</span><span class="nx">offsetChar</span><span class="p">}${</span><span class="nf">pad</span><span class="p">(</span><span class="nx">pdHours</span><span class="p">)}</span><span class="s2">:00`</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">postdate</span> <span class="o">=</span> <span class="s2">`</span><span class="p">${</span><span class="nx">datestr</span><span class="p">}</span><span class="s2">T</span><span class="p">${</span><span class="nx">timestr</span><span class="p">}${</span><span class="nx">tzString</span><span class="p">}</span><span class="s2">`</span><span class="p">;</span>
+
+
+<span class="kd">const</span> <span class="nx">slug</span> <span class="o">=</span> <span class="s2">`</span><span class="p">${</span><span class="nx">slugbase</span><span class="p">}</span><span class="s2">`</span>
+<span class="kd">const</span> <span class="nx">fn</span> <span class="o">=</span> <span class="s2">`</span><span class="p">${</span><span class="nx">slug</span><span class="p">}</span><span class="s2">.md`</span><span class="p">;</span>
+<span class="kd">let</span> <span class="nx">preamble</span> <span class="o">=</span> <span class="s2">`# </span><span class="p">${</span><span class="nx">title</span><span class="p">}</span><span class="s2"> \n\n`</span><span class="p">;</span>
+
+<span class="nx">mergedTags</span><span class="p">.</span><span class="nf">forEach</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">item</span><span class="p">,</span><span class="nx">index</span><span class="p">){</span>
+   <span class="nx">preamble</span> <span class="o">+=</span> <span class="s2">`#</span><span class="p">${</span><span class="nx">item</span><span class="p">}</span><span class="s2"> `</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">);</span>
+
+<span class="k">if </span><span class="p">(</span><span class="nx">addLinkToInbox</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">preamble</span> <span class="o">+=</span> <span class="dl">"</span><span class="se">\n\n</span><span class="s2">[[inbox]]</span><span class="se">\n</span><span class="dl">"</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nx">preamble</span> <span class="o">+=</span> <span class="dl">"</span><span class="se">\n\n</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="kd">var</span> <span class="nx">doc</span> <span class="o">=</span> <span class="s2">`</span><span class="p">${</span><span class="nx">preamble</span><span class="p">}${</span><span class="nx">txt</span><span class="p">}</span><span class="s2">`</span><span class="p">;</span>
+
+<span class="k">if </span><span class="p">(</span><span class="nx">addTimeStamp</span><span class="p">){</span>
+
+    <span class="nx">doc</span> <span class="o">+=</span> <span class="s2">`\n\nCaptured: </span><span class="p">${</span><span class="nx">postdate</span><span class="p">}</span><span class="s2">\n`</span>
+<span class="p">}</span>
+
+<span class="kd">const</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">url</span><span class="p">:</span> <span class="s2">`https://api.github.com/repos/</span><span class="p">${</span><span class="nx">githubUser</span><span class="p">}</span><span class="s2">/</span><span class="p">${</span><span class="nx">repo</span><span class="p">}</span><span class="s2">/contents/</span><span class="p">${</span><span class="nx">inboxFolder</span><span class="p">}${</span><span class="nx">fn</span><span class="p">}</span><span class="s2">`</span><span class="p">,</span>
+    <span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">PUT</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">data</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">message</span><span class="p">:</span> <span class="s2">`Inbox from Drafts </span><span class="p">${</span><span class="nx">datestr</span><span class="p">}</span><span class="s2">`</span><span class="p">,</span>
+        <span class="na">content</span><span class="p">:</span> <span class="nx">Base64</span><span class="p">.</span><span class="nf">encode</span><span class="p">(</span><span class="nx">doc</span><span class="p">)</span>
+    <span class="p">},</span>
+    <span class="na">headers</span><span class="p">:</span> <span class="p">{</span>
+        <span class="dl">'</span><span class="s1">Authorization</span><span class="dl">'</span><span class="p">:</span> <span class="s2">`token </span><span class="p">${</span><span class="nx">githubKey</span><span class="p">}</span><span class="s2">`</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="kd">var</span> <span class="nx">response</span> <span class="o">=</span> <span class="nx">http</span><span class="p">.</span><span class="nf">request</span><span class="p">(</span><span class="nx">options</span><span class="p">);</span>
+
+<span class="k">if </span><span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">success</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// yay</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">statusCode</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">error</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nf">pad</span><span class="p">(</span><span class="nx">n</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">str</span> <span class="o">=</span> <span class="nc">String</span><span class="p">(</span><span class="nx">n</span><span class="p">);</span>
+    <span class="k">while </span><span class="p">(</span><span class="nx">str</span><span class="p">.</span><span class="nx">length</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">str</span> <span class="o">=</span> <span class="s2">`0</span><span class="p">${</span><span class="nx">str</span><span class="p">}</span><span class="s2">`</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="nx">str</span><span class="p">;</span>
+<span class="p">}</span>
+
+</code></pre></div></div>
+
+
+<script type="text/javascript">
+  // Hack: Replace page-link with "Page Title"
+  document.querySelectorAll(".markdown-body a[title]").forEach((a) => {
+    a.innerText = a.title;
+  });
+  // Hack: Remove .md extension from wikilinks to get the html in jekyll
+  document.querySelectorAll("a").forEach(l => {
+    if (l.href.endsWith('.md')) {
+      l.href = l.href.substring(0, l.href.length-3)
+    }
+  })
+</script>
+
+
+      
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.0/anchor.min.js" integrity="sha256-lZaRhKri35AyJSypXXs4o6OPFTbTmUoltBbDCbdzegg=" crossorigin="anonymous"></script>
+    <script>anchors.add();</script>
+  </body>
+</html>

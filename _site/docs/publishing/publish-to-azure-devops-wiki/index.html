@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Publish to Azure DevOps Wiki | About these notes</title>
+<meta name="generator" content="Jekyll v4.3.3" />
+<meta property="og:title" content="Publish to Azure DevOps Wiki" />
+<meta property="og:locale" content="en_US" />
+<link rel="canonical" href="http://localhost:4000/docs/publishing/publish-to-azure-devops-wiki/" />
+<meta property="og:url" content="http://localhost:4000/docs/publishing/publish-to-azure-devops-wiki/" />
+<meta property="og:site_name" content="About these notes" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Publish to Azure DevOps Wiki" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","headline":"Publish to Azure DevOps Wiki","url":"http://localhost:4000/docs/publishing/publish-to-azure-devops-wiki/"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <link rel="stylesheet" href="/assets/css/style.css?v=5e25ebfb6b5b6991017cbe8f9120d8b49deb4732">
+    <!-- start custom head snippets, customize with your own _includes/head-custom.html file -->
+
+<!-- Setup Google Analytics -->
+
+
+
+<!-- You can set your favicon here -->
+<!-- link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" -->
+
+<!-- end custom head snippets -->
+
+  </head>
+  <body>
+    <div class="container-lg px-3 my-5 markdown-body">
+      
+      <h1><a href="http://localhost:4000/">About these notes</a></h1>
+      
+
+      <h1 id="publish-to-azure-devops-wiki">Publish to Azure DevOps Wiki</h1>
+
+<p>Publish your Foam workspace as an Azure DevOps wiki.</p>
+
+<p><a href="https://azure.microsoft.com/en-us/services/devops/">Azure DevOps</a> is Microsoft’s collaboration software for software development teams, formerly known as Team Foundation Server (TFS) and Visual Studio Team Services. It is available as an on-premise or SaaS version. The following recipe was tested with the SaaS version, but should work the same way for the on-premise.</p>
+
+<p>The following recipe is written with the assumption that you already have an <a href="https://azure.microsoft.com/en-us/services/devops/">Azure DevOps</a> project.</p>
+
+<h2 id="setup-a-foam-workspace">Setup a Foam workspace</h2>
+
+<ol>
+  <li>Generate a Foam workspace using the <a href="https://github.com/foambubble/foam-template">foam-template project</a>.</li>
+  <li>Change the remote to a git repository in Azure DevOps (Repos -&gt; Import a Repository -&gt; Add Clone URL with Authentication), or copy all the files into a new Azure DevOps git repository.</li>
+  <li>Define which document will be the wiki home page. To do that, create a file called <code class="language-plaintext highlighter-rouge">.order</code> in the Foam workspace root folder, with first line being the document filename without <code class="language-plaintext highlighter-rouge">.md</code> extension. For a project created from the Foam template, the file would look like this:</li>
+</ol>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>readme
+</code></pre></div></div>
+
+<ol>
+  <li>Push the repository to remote in Azure DevOps.</li>
+</ol>
+
+<h2 id="publish-repository-to-a-wiki">Publish repository to a wiki</h2>
+
+<ol>
+  <li>Navigate to your Azure DevOps project in a web browser.</li>
+  <li>Choose <strong>Overview</strong> &gt; <strong>Wiki</strong>. If you don’t have wikis for your project, choose <strong>Publish code as a wiki</strong> on welcome page.</li>
+  <li>Choose repository with your Foam workspace, branch (usually <code class="language-plaintext highlighter-rouge">master</code> or <code class="language-plaintext highlighter-rouge">main</code>), folder (for workspace created from foam-template it is <code class="language-plaintext highlighter-rouge">/</code>), and wiki name, and press <strong>Publish</strong>.</li>
+</ol>
+
+<p>A published workspace looks like this:</p>
+
+<p><img src="/assets/images/azure-devops-wiki-demo.png" alt="Azure DevOps wiki" /></p>
+
+<p>There is default table of contents pane to the left of the wiki content. Here, you’ll find a list of all directories that are present in your Foam workspace, and all wiki pages. Page names are derived from files names, and they are listed in alphabetical order. You may reorder pages by adding filenames without <code class="language-plaintext highlighter-rouge">.md</code> extension to <code class="language-plaintext highlighter-rouge">.order</code> file.</p>
+
+<p><em>Note that first entry in <code class="language-plaintext highlighter-rouge">.order</code> file defines wiki’s home page.</em></p>
+
+<h2 id="update-wiki">Update wiki</h2>
+
+<p>While you are pushing changes to GitHub, you won’t see the wiki updated if you don’t add Azure as a remote. You can push to multiple repositories simultaneously.</p>
+
+<ol>
+  <li>First open a terminal and check if Azure is added running: <code class="language-plaintext highlighter-rouge">git remote show origin</code>. If you don’t see Azure add it in the output then follow these steps.</li>
+  <li>Rename your current remote (most likely named origin) to a different name by running: <code class="language-plaintext highlighter-rouge">git remote rename origin main</code></li>
+  <li>You can then add the remote for your second remote repository, in this case, Azure. e.g <code class="language-plaintext highlighter-rouge">git remote add azure https://&lt;YOUR_ID&gt;@dev.azure.com/&lt;YOUR_ID&gt;/foam-notes/_git/foam-notes</code>. You can get it from: Repos-&gt;Files-&gt;Clone and copy the URL.</li>
+  <li>Now, you need to set up your origin remote to push to both of these. So run: <code class="language-plaintext highlighter-rouge">git config -e</code> and edit it.</li>
+  <li>Add the <code class="language-plaintext highlighter-rouge">remote origin</code> section to the bottom of the file with the URLs from each remote repository you’d like to push to. You’ll see something like that:</li>
+</ol>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="o">[</span>core]
+  ...
+   <span class="o">(</span>ignore this part<span class="o">)</span>
+   ...
+<span class="o">[</span>branch <span class="s2">"master"</span><span class="o">]</span>
+  remote <span class="o">=</span> github
+  merge <span class="o">=</span> refs/heads/master
+<span class="o">[</span>remote <span class="s2">"github"</span><span class="o">]</span>
+  url <span class="o">=</span> git@github.com:username/repo.git
+  fetch <span class="o">=</span> +refs/heads/<span class="k">*</span>:refs/remotes/github/<span class="k">*</span>
+<span class="o">[</span>remote <span class="s2">"azure"</span><span class="o">]</span>
+  url <span class="o">=</span> https://&lt;YOUR_ID&gt;@dev.azure.com/&lt;YOUR_ID&gt;/foam-notes/_git/foam-notes
+  fetch <span class="o">=</span> +refs/heads/<span class="k">*</span>:refs/remotes/azure/<span class="k">*</span>
+<span class="o">[</span>remote <span class="s2">"origin"</span><span class="o">]</span>
+  url <span class="o">=</span> git@github.com:username/repo.git
+  url <span class="o">=</span> https://&lt;YOUR_ID&gt;@dev.azure.com/&lt;YOUR_ID&gt;/foam-notes/_git/foam-notes
+</code></pre></div></div>
+
+<ol>
+  <li>You can then push to both repositories by: <code class="language-plaintext highlighter-rouge">git push origin master</code> or a single one using: <code class="language-plaintext highlighter-rouge">git push github master</code> or <code class="language-plaintext highlighter-rouge">git push azure master</code></li>
+</ol>
+
+<p>For more information, read the <a href="https://docs.microsoft.com/en-us/azure/devops/project/wiki/publish-repo-to-wiki">Azure DevOps documentation</a>.</p>
+
+
+<script type="text/javascript">
+  // Hack: Replace page-link with "Page Title"
+  document.querySelectorAll(".markdown-body a[title]").forEach((a) => {
+    a.innerText = a.title;
+  });
+  // Hack: Remove .md extension from wikilinks to get the html in jekyll
+  document.querySelectorAll("a").forEach(l => {
+    if (l.href.endsWith('.md')) {
+      l.href = l.href.substring(0, l.href.length-3)
+    }
+  })
+</script>
+
+
+      
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.0/anchor.min.js" integrity="sha256-lZaRhKri35AyJSypXXs4o6OPFTbTmUoltBbDCbdzegg=" crossorigin="anonymous"></script>
+    <script>anchors.add();</script>
+  </body>
+</html>

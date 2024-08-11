@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Katex Math Rendering | About these notes</title>
+<meta name="generator" content="Jekyll v4.3.3" />
+<meta property="og:title" content="Katex Math Rendering" />
+<meta property="og:locale" content="en_US" />
+<link rel="canonical" href="http://localhost:4000/docs/publishing/math-support-with-katex/" />
+<meta property="og:url" content="http://localhost:4000/docs/publishing/math-support-with-katex/" />
+<meta property="og:site_name" content="About these notes" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Katex Math Rendering" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","headline":"Katex Math Rendering","url":"http://localhost:4000/docs/publishing/math-support-with-katex/"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <link rel="stylesheet" href="/assets/css/style.css?v=5e25ebfb6b5b6991017cbe8f9120d8b49deb4732">
+    <!-- start custom head snippets, customize with your own _includes/head-custom.html file -->
+
+<!-- Setup Google Analytics -->
+
+
+
+<!-- You can set your favicon here -->
+<!-- link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" -->
+
+<!-- end custom head snippets -->
+
+  </head>
+  <body>
+    <div class="container-lg px-3 my-5 markdown-body">
+      
+      <h1><a href="http://localhost:4000/">About these notes</a></h1>
+      
+
+      <h1 id="katex-math-rendering">Katex Math Rendering</h1>
+
+<p>Apart from using the method mentioned in [[math-support-with-mathjax]], we can also use KaTeX to render our math equations in Foam. The caveat is: we can’t rely on GitHub Pages to host and deploy our website anymore, because the plugin we’ll be using to let Jekyll support KaTeX doesn’t play well together with GitHub Pages.</p>
+
+<p>The alternative solution is to using [[publish-to-vercel]] for building and publishing our website, so before you start integrating KaTeX into your Foam project, please follow the instructions to host your Foam workspace on [[publish-to-vercel]] first.</p>
+
+<h2 id="adding-required-plugins">Adding required plugins</h2>
+
+<p>Add the plugin <code class="language-plaintext highlighter-rouge">jekyll-katex</code> to your Foam workspace’s <code class="language-plaintext highlighter-rouge">_config.yml</code> and <code class="language-plaintext highlighter-rouge">Gemfile</code> if you haven’t done so already. For detailed instructions, please refer to the <code class="language-plaintext highlighter-rouge">#Adding a _config.yml</code> and <code class="language-plaintext highlighter-rouge">#Adding a Gemfile</code> in [[publish-to-vercel]].</p>
+
+<h2 id="loading-katex-js-and-css">Loading KaTeX JS and CSS</h2>
+
+<p>Because we are using KaTeX to render math, we will also need to import KaTeX’s JS and CSS files from CDN. The official method to load these files is documented at: <a href="https://github.com/KaTeX/KaTeX#starter-template">KaTeX/KaTeX#starter-template</a>. In our case, we will need to add the following code snippet to our <code class="language-plaintext highlighter-rouge">_layouts/page.html</code>:</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">&lt;!-- _layouts/page.html --&gt;</span>
+---
+layout: default
+---
+
+<span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">href=</span><span class="s">"https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css"</span> <span class="na">integrity=</span><span class="s">"sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X"</span> <span class="na">crossorigin=</span><span class="s">"anonymous"</span><span class="nt">&gt;</span>
+
+<span class="c">&lt;!-- The loading of KaTeX is deferred to speed up page rendering --&gt;</span>
+<span class="nt">&lt;script </span><span class="na">defer</span> <span class="na">src=</span><span class="s">"https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js"</span> <span class="na">integrity=</span><span class="s">"sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4"</span> <span class="na">crossorigin=</span><span class="s">"anonymous"</span><span class="nt">&gt;&lt;/script&gt;</span>
+
+<span class="c">&lt;!-- To automatically render math in text elements, include the auto-render extension: --&gt;</span>
+<span class="nt">&lt;script </span><span class="na">defer</span> <span class="na">src=</span><span class="s">"https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js"</span> <span class="na">integrity=</span><span class="s">"sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa"</span> <span class="na">crossorigin=</span><span class="s">"anonymous"</span> <span class="na">onload=</span><span class="s">"renderMathInElement(document.body);"</span><span class="nt">&gt;&lt;/script&gt;</span>
+
+<span class="c">&lt;!-- ... --&gt;</span>
+</code></pre></div></div>
+
+<h2 id="adding-liquid-tags-to-wrap-page-content">Adding liquid tags to wrap page content</h2>
+
+<p>The plugin <code class="language-plaintext highlighter-rouge">jekyll-katex</code> focuses on rendering:</p>
+
+<ul>
+  <li>Single math equations wrapped inside <code class="language-plaintext highlighter-rouge">katex</code> liquid tags like <code class="language-plaintext highlighter-rouge">{% katex %} ... {% endkatex %}</code>.</li>
+  <li>Or multiple math equations in paragraphs wrapped inside <code class="language-plaintext highlighter-rouge">{% katexmm %} ... {% endkatexmm %}</code>.</li>
+</ul>
+
+<p>In our case, we’ll be using the latter tag to wrap our <code class="language-plaintext highlighter-rouge">{{ content }}</code>. Wrap <code class="language-plaintext highlighter-rouge">{{ content }}</code> in the liquid tags inside <code class="language-plaintext highlighter-rouge">_layouts/page.html</code> like so:</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">&lt;!-- _layouts/page.html --&gt;</span>
+
+<span class="c">&lt;!-- ... --&gt;</span>
+{% katexmm %} {{ content }} {% endkatexmm %}
+<span class="c">&lt;!-- ... --&gt;</span>
+</code></pre></div></div>
+
+<h2 id="render-equations-in-foams-homepage-as-well">Render equations in Foam’s homepage as well</h2>
+
+<p>You may have noticed that we only made modifications to the template <code class="language-plaintext highlighter-rouge">_layouts/page.html</code>, which means that <code class="language-plaintext highlighter-rouge">_layouts/home.html</code> won’t have KaTeX support. If you wan’t to render math in Foam’s home page, you’ll need to make the same modifications to <code class="language-plaintext highlighter-rouge">_layouts/home.html</code> as well.</p>
+
+<p>Finally, if all goes well, then our site hosted on Vercel will support rendering math equations with KaTeX after committing these changes to GitHub. Here’s a demo of the default template with KaTeX support: <a href="https://foam-template.vercel.app/">Foam Template with KaTeX support</a>.</p>
+
+
+
+<script type="text/javascript">
+  // Hack: Replace page-link with "Page Title"
+  document.querySelectorAll(".markdown-body a[title]").forEach((a) => {
+    a.innerText = a.title;
+  });
+  // Hack: Remove .md extension from wikilinks to get the html in jekyll
+  document.querySelectorAll("a").forEach(l => {
+    if (l.href.endsWith('.md')) {
+      l.href = l.href.substring(0, l.href.length-3)
+    }
+  })
+</script>
+
+
+      
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.0/anchor.min.js" integrity="sha256-lZaRhKri35AyJSypXXs4o6OPFTbTmUoltBbDCbdzegg=" crossorigin="anonymous"></script>
+    <script>anchors.add();</script>
+  </body>
+</html>

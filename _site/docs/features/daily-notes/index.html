@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Daily Notes | About these notes</title>
+<meta name="generator" content="Jekyll v4.3.3" />
+<meta property="og:title" content="Daily Notes" />
+<meta property="og:locale" content="en_US" />
+<link rel="canonical" href="http://localhost:4000/docs/features/daily-notes/" />
+<meta property="og:url" content="http://localhost:4000/docs/features/daily-notes/" />
+<meta property="og:site_name" content="About these notes" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Daily Notes" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","headline":"Daily Notes","url":"http://localhost:4000/docs/features/daily-notes/"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <link rel="stylesheet" href="/assets/css/style.css?v=5e25ebfb6b5b6991017cbe8f9120d8b49deb4732">
+    <!-- start custom head snippets, customize with your own _includes/head-custom.html file -->
+
+<!-- Setup Google Analytics -->
+
+
+
+<!-- You can set your favicon here -->
+<!-- link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" -->
+
+<!-- end custom head snippets -->
+
+  </head>
+  <body>
+    <div class="container-lg px-3 my-5 markdown-body">
+      
+      <h1><a href="http://localhost:4000/">About these notes</a></h1>
+      
+
+      <h1 id="daily-notes">Daily Notes</h1>
+
+<p>Daily notes allow you to quickly create and access a new notes file for each day. This is a surpisingly effective and increasingly common strategy to organize notes and manage events.</p>
+
+<p>View today’s note file by running the <code class="language-plaintext highlighter-rouge">Foam: Open Daily Note</code> command, by using the shortcut <code class="language-plaintext highlighter-rouge">alt+d</code> (note: shortcuts can be <a href="https://code.visualstudio.com/docs/getstarted/keybindings">overridden</a>), or by using <a href="#Snippets">#snippets</a>. The name, location, and title of daily notes files is <a href="#Configuration">#configurable</a>.</p>
+
+<h2 id="roam-style-automatic-daily-notes">Roam-style Automatic Daily Notes</h2>
+
+<p>You can automatically open today’s note on startup by setting the <code class="language-plaintext highlighter-rouge">Foam › Open Daily Note: On Startup</code> setting to <code class="language-plaintext highlighter-rouge">true</code>.</p>
+
+<h2 id="daily-note-templates">Daily Note Templates</h2>
+
+<p>Daily notes can also make use of [[Note Templates]], by defining a special <code class="language-plaintext highlighter-rouge">.foam/templates/daily-note.md</code> template.</p>
+
+<h2 id="snippets">Snippets</h2>
+
+<p>Create a link to a recent daily note using <a href="https://code.visualstudio.com/docs/editor/userdefinedsnippets">snippets</a>. Type <code class="language-plaintext highlighter-rouge">/today</code> and press <code class="language-plaintext highlighter-rouge">enter</code> to link to today’s note. You can also write:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Snippet</th>
+      <th>Date</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">/tomorrow</code></td>
+      <td>tomorrow</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">/yesterday</code></td>
+      <td>yesterday</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">/monday</code></td>
+      <td>next Monday</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">/+1d</code></td>
+      <td>tomorrow</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">/-3d</code></td>
+      <td>3 days ago</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">/+1w</code></td>
+      <td>in a week</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">/-1m</code></td>
+      <td>one month ago</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">/+1y</code></td>
+      <td>in one year</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="configuration">Configuration</h2>
+
+<p>By default, Daily Notes will be created in a file called <code class="language-plaintext highlighter-rouge">yyyy-mm-dd.md</code> in the workspace’s <code class="language-plaintext highlighter-rouge">journals</code> folder, with a heading <code class="language-plaintext highlighter-rouge">yyyy-mm-dd</code>.</p>
+
+<p>These settings can be overridden in your workspace or global <code class="language-plaintext highlighter-rouge">.vscode/settings.json</code> file, using the <a href="https://github.com/felixge/node-dateformat#mask-options"><strong>dateformat</strong> date masking syntax</a>:</p>
+
+<p>It’s possible to customize path and heading of your daily notes, by following the <a href="https://github.com/felixge/node-dateformat#mask-options">dateformat masking syntax</a>.
+The following properties can be used:</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">  </span><span class="nl">"foam.openDailyNote.directory"</span><span class="p">:</span><span class="w"> </span><span class="s2">"journal"</span><span class="err">,</span><span class="w">
+  </span><span class="nl">"foam.openDailyNote.filenameFormat"</span><span class="p">:</span><span class="w"> </span><span class="s2">"'daily-note'-yyyy-mm-dd"</span><span class="err">,</span><span class="w">
+  </span><span class="nl">"foam.openDailyNote.fileExtension"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mdx"</span><span class="err">,</span><span class="w">
+  </span><span class="nl">"foam.openDailyNote.titleFormat"</span><span class="p">:</span><span class="w"> </span><span class="s2">"'Journal Entry, ' dddd, mmmm d"</span><span class="err">,</span><span class="w">
+</span></code></pre></div></div>
+
+<p>The above configuration would create a file <code class="language-plaintext highlighter-rouge">journal/daily-note-2020-07-25.mdx</code>, with the heading <code class="language-plaintext highlighter-rouge">Journal Entry, Sunday, July 25</code>.</p>
+
+<blockquote>
+  <table>
+    <tbody>
+      <tr>
+        <td>NOTE: It is possible to set the filepath of a daily note according to the date using the special [[note-properties]] configurable for [[Note Templates]]. Specifically see [[note-templates#Example of date-based</td>
+        <td>Example of date-based filepath]]. Using the template property will override any setting configured through <code class="language-plaintext highlighter-rouge">.vscode/settings.json</code>.</td>
+      </tr>
+    </tbody>
+  </table>
+</blockquote>
+
+<h2 id="extend-functionality-weekly-monthly-quarterly-notes">Extend Functionality (Weekly, Monthly, Quarterly Notes)</h2>
+
+<p>Please see [[note-macros]]</p>
+
+
+
+<script type="text/javascript">
+  // Hack: Replace page-link with "Page Title"
+  document.querySelectorAll(".markdown-body a[title]").forEach((a) => {
+    a.innerText = a.title;
+  });
+  // Hack: Remove .md extension from wikilinks to get the html in jekyll
+  document.querySelectorAll("a").forEach(l => {
+    if (l.href.endsWith('.md')) {
+      l.href = l.href.substring(0, l.href.length-3)
+    }
+  })
+</script>
+
+
+      
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.0/anchor.min.js" integrity="sha256-lZaRhKri35AyJSypXXs4o6OPFTbTmUoltBbDCbdzegg=" crossorigin="anonymous"></script>
+    <script>anchors.add();</script>
+  </body>
+</html>

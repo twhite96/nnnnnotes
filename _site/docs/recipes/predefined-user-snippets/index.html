@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Pre-defined User Snippets | About these notes</title>
+<meta name="generator" content="Jekyll v4.3.3" />
+<meta property="og:title" content="Pre-defined User Snippets" />
+<meta property="og:locale" content="en_US" />
+<link rel="canonical" href="http://localhost:4000/docs/recipes/predefined-user-snippets/" />
+<meta property="og:url" content="http://localhost:4000/docs/recipes/predefined-user-snippets/" />
+<meta property="og:site_name" content="About these notes" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Pre-defined User Snippets" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","headline":"Pre-defined User Snippets","url":"http://localhost:4000/docs/recipes/predefined-user-snippets/"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <link rel="stylesheet" href="/assets/css/style.css?v=5e25ebfb6b5b6991017cbe8f9120d8b49deb4732">
+    <!-- start custom head snippets, customize with your own _includes/head-custom.html file -->
+
+<!-- Setup Google Analytics -->
+
+
+
+<!-- You can set your favicon here -->
+<!-- link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" -->
+
+<!-- end custom head snippets -->
+
+  </head>
+  <body>
+    <div class="container-lg px-3 my-5 markdown-body">
+      
+      <h1><a href="http://localhost:4000/">About these notes</a></h1>
+      
+
+      <h1 id="pre-defined-user-snippets">Pre-defined User Snippets</h1>
+
+<p>This #recipe allows us to introduce Roam style commands to Foam, by using <a href="https://code.visualstudio.com/docs/editor/userdefinedsnippets">VS Code Snippets</a>. Consider the below snippets:</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"Zettelkasten Id"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"scope"</span><span class="p">:</span><span class="w"> </span><span class="s2">"markdown"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"prefix"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/id"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Zettelkasten Id"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"body"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="s2">"${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE} ${CURRENT_HOUR}:${CURRENT_MINUTE}:${CURRENT_SECOND}"</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"Current date"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"scope"</span><span class="p">:</span><span class="w"> </span><span class="s2">"markdown"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"prefix"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/date"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Current date"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"body"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="s2">"${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE} ${CURRENT_HOUR}:${CURRENT_MINUTE}:${CURRENT_SECOND}"</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Which would look like:
+<img src="/assets/images/snippets.gif" alt="GIF demonstrating User Snippets" /></p>
+
+<p>Using snippets enables Foam users to add [[custom-snippets]] themselves so they live alongside the first-class <code class="language-plaintext highlighter-rouge">/commands</code>.</p>
+
+<h2 id="notes--considerations">Notes &amp; Considerations</h2>
+
+<ul>
+  <li>VS Code supplies “commands” already via the command palette
+    <ul>
+      <li>Consider the UX around this. Users less familiar with VS Code are more likely to be familiar with <code class="language-plaintext highlighter-rouge">/</code> to trigger a command menu. Experienced VS Code users may be more likely to favour the command palette.</li>
+    </ul>
+  </li>
+  <li>We can use <code class="language-plaintext highlighter-rouge">TabCompletionProvider</code> and <code class="language-plaintext highlighter-rouge">snippets</code> and mix them (maybe) via the following VS Code setting: <code class="language-plaintext highlighter-rouge">"editor.snippetSuggestions": "inline" | "top" | "bottom" | "none"</code></li>
+  <li>For more discussion, consult the PR <a href="https://github.com/foambubble/foam/pull/192">here</a>.</li>
+</ul>
+
+<h2 id="simplifying-markdown-syntax">Simplifying Markdown Syntax</h2>
+
+<p>Some markdown syntax is difficult for users who have never authored markdown before. Take for example a checkbox/todo. The following syntax is required:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- [ ] Something todo...
+</code></pre></div></div>
+
+<p>We could provide snippets that expand out into the associated markdown syntax, like in the below GIF:
+<img src="/assets/images/markdown-snippets.gif" alt="GIF demonstrating markdown snippets" /></p>
+
+<p>The JSON for these snippets can be found <a href="https://github.com/foambubble/foam/pull/192#issuecomment-666736270">here</a>.</p>
+
+
+
+<script type="text/javascript">
+  // Hack: Replace page-link with "Page Title"
+  document.querySelectorAll(".markdown-body a[title]").forEach((a) => {
+    a.innerText = a.title;
+  });
+  // Hack: Remove .md extension from wikilinks to get the html in jekyll
+  document.querySelectorAll("a").forEach(l => {
+    if (l.href.endsWith('.md')) {
+      l.href = l.href.substring(0, l.href.length-3)
+    }
+  })
+</script>
+
+
+      
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.0/anchor.min.js" integrity="sha256-lZaRhKri35AyJSypXXs4o6OPFTbTmUoltBbDCbdzegg=" crossorigin="anonymous"></script>
+    <script>anchors.add();</script>
+  </body>
+</html>

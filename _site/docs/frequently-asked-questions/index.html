@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Frequently Asked Questions | About these notes</title>
+<meta name="generator" content="Jekyll v4.3.3" />
+<meta property="og:title" content="Frequently Asked Questions" />
+<meta property="og:locale" content="en_US" />
+<link rel="canonical" href="http://localhost:4000/docs/frequently-asked-questions/" />
+<meta property="og:url" content="http://localhost:4000/docs/frequently-asked-questions/" />
+<meta property="og:site_name" content="About these notes" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Frequently Asked Questions" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","headline":"Frequently Asked Questions","url":"http://localhost:4000/docs/frequently-asked-questions/"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <link rel="stylesheet" href="/assets/css/style.css?v=5e25ebfb6b5b6991017cbe8f9120d8b49deb4732">
+    <!-- start custom head snippets, customize with your own _includes/head-custom.html file -->
+
+<!-- Setup Google Analytics -->
+
+
+
+<!-- You can set your favicon here -->
+<!-- link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" -->
+
+<!-- end custom head snippets -->
+
+  </head>
+  <body>
+    <div class="container-lg px-3 my-5 markdown-body">
+      
+      <h1><a href="http://localhost:4000/">About these notes</a></h1>
+      
+
+      <h1 id="frequently-asked-questions">Frequently Asked Questions</h1>
+
+<blockquote>
+  <p>⚠️ Foam is still in preview. Expect the experience to be a little rough.</p>
+</blockquote>
+
+<ul>
+  <li><a href="#frequently-asked-questions">Frequently Asked Questions</a>
+    <ul>
+      <li><a href="#linksgraphsbacklinks-dont-work-how-do-i-enable-them">Links/Graphs/BackLinks don’t work. How do I enable them?</a></li>
+      <li><a href="#i-dont-want-foam-enabled-for-all-my-workspaces">I don’t want Foam enabled for all my workspaces</a></li>
+      <li><a href="#i-want-to-publish-the-graph-view-to-github-pages-or-vercel">I want to publish the graph view to GitHub pages or Vercel</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="linksgraphsbacklinks-dont-work-how-do-i-enable-them">Links/Graphs/BackLinks don’t work. How do I enable them?</h2>
+
+<ul>
+  <li>Ensure that you have all the [[recommended-extensions]] installed in Visual Studio Code</li>
+  <li>Reload Visual Studio Code by running <code class="language-plaintext highlighter-rouge">Cmd</code> + <code class="language-plaintext highlighter-rouge">Shift</code> + <code class="language-plaintext highlighter-rouge">P</code> (<code class="language-plaintext highlighter-rouge">Ctrl</code> + <code class="language-plaintext highlighter-rouge">Shift</code> + <code class="language-plaintext highlighter-rouge">P</code> for Windows), type “reload” and run the <strong>Developer: Reload Window</strong> command to for the updated extensions take effect</li>
+  <li>Check the formatting rules for links on [[foam-file-format]] and [[wikilinks]]</li>
+</ul>
+
+<h2 id="i-dont-want-foam-enabled-for-all-my-workspaces">I don’t want Foam enabled for all my workspaces</h2>
+<p>Any extension you install in Visual Studio Code is enabled by default. Given the philosophy of Foam, it works out of the box without doing any configuration upfront. In case you want to disable Foam for a specific workspace, or disable Foam by default and enable it for specific workspaces, it is advised to follow the best practices as <a href="https://code.visualstudio.com/docs/editor/extension-marketplace#_manage-extensions">documented by Visual Studio Code</a></p>
+
+<h2 id="i-want-to-publish-the-graph-view-to-github-pages-or-vercel">I want to publish the graph view to GitHub pages or Vercel</h2>
+<p>If you want a different front-end look to your published foam and a way to see your graph view, we’d recommend checking out these templates:</p>
+<ul>
+  <li><a href="https://github.com/mathieudutour/foam-gatsby-template">foam-gatsby</a> by <a href="https://github.com/mathieudutour">Mathieu Dutour</a></li>
+  <li><a href="https://github.com/hikerpig/foam-template-gatsby-kb">foam-gatsby-kb</a> by <a href="https://github.com/hikerpig">hikerpig</a></li>
+</ul>
+
+
+
+<script type="text/javascript">
+  // Hack: Replace page-link with "Page Title"
+  document.querySelectorAll(".markdown-body a[title]").forEach((a) => {
+    a.innerText = a.title;
+  });
+  // Hack: Remove .md extension from wikilinks to get the html in jekyll
+  document.querySelectorAll("a").forEach(l => {
+    if (l.href.endsWith('.md')) {
+      l.href = l.href.substring(0, l.href.length-3)
+    }
+  })
+</script>
+
+
+      
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.0/anchor.min.js" integrity="sha256-lZaRhKri35AyJSypXXs4o6OPFTbTmUoltBbDCbdzegg=" crossorigin="anonymous"></script>
+    <script>anchors.add();</script>
+  </body>
+</html>

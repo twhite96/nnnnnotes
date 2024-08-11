@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Writing Notes | About these notes</title>
+<meta name="generator" content="Jekyll v4.3.3" />
+<meta property="og:title" content="Writing Notes" />
+<meta property="og:locale" content="en_US" />
+<link rel="canonical" href="http://localhost:4000/docs/getting-started/write-notes-in-foam/" />
+<meta property="og:url" content="http://localhost:4000/docs/getting-started/write-notes-in-foam/" />
+<meta property="og:site_name" content="About these notes" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Writing Notes" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","headline":"Writing Notes","url":"http://localhost:4000/docs/getting-started/write-notes-in-foam/"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <link rel="stylesheet" href="/assets/css/style.css?v=5e25ebfb6b5b6991017cbe8f9120d8b49deb4732">
+    <!-- start custom head snippets, customize with your own _includes/head-custom.html file -->
+
+<!-- Setup Google Analytics -->
+
+
+
+<!-- You can set your favicon here -->
+<!-- link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" -->
+
+<!-- end custom head snippets -->
+
+  </head>
+  <body>
+    <div class="container-lg px-3 my-5 markdown-body">
+      
+      <h1><a href="http://localhost:4000/">About these notes</a></h1>
+      
+
+      <h1 id="writing-notes">Writing Notes</h1>
+
+<p>Notes are simple text files with some extra flavor, in the shape of Markdown syntax and support for extra properties (see [[note-properties]]).</p>
+
+<h2 id="foam-syntax">Foam Syntax</h2>
+
+<p>Foam uses standard Markdown, with a few added twists:</p>
+
+<ul>
+  <li>the title of a note (e.g. in the [[graph-visualization]]) is given by precedence based on:
+    <ul>
+      <li>the <code class="language-plaintext highlighter-rouge">title</code> property (see [[note-properties]])</li>
+      <li>the first <code class="language-plaintext highlighter-rouge"># heading 1</code> of the file</li>
+      <li>the file name</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="markdown-syntax">Markdown Syntax</h2>
+
+<p>With Markdown, we can style our notes in a simple way, while keeping the document a simple text file (the best way to future-proof your writings!).</p>
+
+<p>You can see the formatted output by running the <code class="language-plaintext highlighter-rouge">Markdown: Open Preview to the Side</code> command.</p>
+
+<p>Here is a high level overview of Markdown, for more information on the Markdown syntax <a href="https://commonmark.org/help/">see here</a>.</p>
+
+<h1 id="heading-1">Heading 1</h1>
+
+<h2 id="heading-2">Heading 2</h2>
+
+<h3 id="heading-3">Heading 3</h3>
+
+<h4 id="heading-4">Heading 4</h4>
+
+<h5 id="heading-5">Heading 5</h5>
+
+<h6 id="heading-6">Heading 6</h6>
+
+<p>This is a <a href="https://www.google.com">link to google</a>.</p>
+
+<p>This is a wikilink (aka internal link) to [[note-properties]].</p>
+
+<p>Here is an image:
+<img src="/attachments/foam-icon.png" alt="image" /></p>
+
+<blockquote>
+  <p>this is a blockquote
+it can span multiple lines</p>
+</blockquote>
+
+<ul>
+  <li>list item</li>
+  <li>list item</li>
+  <li>list item</li>
+</ul>
+
+<ol>
+  <li>One</li>
+  <li>Two</li>
+  <li>Three</li>
+</ol>
+
+<p>This text is <strong>in bold</strong> and this is <em>italic</em>.</p>
+
+<p>The following is a horizontal rule</p>
+
+<hr />
+
+<p>This is a table:
+| Column 1 | Column 2 |
+| ——– | ——– |
+| R1C1     | R1C2     |
+| R2C1     | R2C2     |</p>
+
+<p>You can <code class="language-plaintext highlighter-rouge">inline code</code> or</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>you can create
+code blocks
+</code></pre></div></div>
+
+
+
+<script type="text/javascript">
+  // Hack: Replace page-link with "Page Title"
+  document.querySelectorAll(".markdown-body a[title]").forEach((a) => {
+    a.innerText = a.title;
+  });
+  // Hack: Remove .md extension from wikilinks to get the html in jekyll
+  document.querySelectorAll("a").forEach(l => {
+    if (l.href.endsWith('.md')) {
+      l.href = l.href.substring(0, l.href.length-3)
+    }
+  })
+</script>
+
+
+      
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.0/anchor.min.js" integrity="sha256-lZaRhKri35AyJSypXXs4o6OPFTbTmUoltBbDCbdzegg=" crossorigin="anonymous"></script>
+    <script>anchors.add();</script>
+  </body>
+</html>

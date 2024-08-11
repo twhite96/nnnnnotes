@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Janitor | About these notes</title>
+<meta name="generator" content="Jekyll v4.3.3" />
+<meta property="og:title" content="Janitor" />
+<meta property="og:locale" content="en_US" />
+<link rel="canonical" href="http://localhost:4000/docs/tools/workspace-janitor/" />
+<meta property="og:url" content="http://localhost:4000/docs/tools/workspace-janitor/" />
+<meta property="og:site_name" content="About these notes" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Janitor" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","headline":"Janitor","url":"http://localhost:4000/docs/tools/workspace-janitor/"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <link rel="stylesheet" href="/assets/css/style.css?v=5e25ebfb6b5b6991017cbe8f9120d8b49deb4732">
+    <!-- start custom head snippets, customize with your own _includes/head-custom.html file -->
+
+<!-- Setup Google Analytics -->
+
+
+
+<!-- You can set your favicon here -->
+<!-- link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" -->
+
+<!-- end custom head snippets -->
+
+  </head>
+  <body>
+    <div class="container-lg px-3 my-5 markdown-body">
+      
+      <h1><a href="http://localhost:4000/">About these notes</a></h1>
+      
+
+      <h1 id="janitor">Janitor</h1>
+
+<p>To store your personal knowledge graph in markdown files instead of a database, we need some additional tooling to create and maintain relationships with notes.</p>
+
+<p><strong>Foam Janitor</strong> (inspired by Andy Matuschak’s <a href="https://github.com/andymatuschak/note-link-janitor">note-link-janitor</a>) helps you migrate existing notes to Foam, and maintain your Foam’s health over time.</p>
+
+<p>Currently, Foam’s Janitor helps you to:</p>
+
+<ul>
+  <li>Ensure your [[link-reference-definitions]] are up to date</li>
+  <li>Ensure every document has a well-formatted title (required for Markdown Links, Markdown Notes, and Foam Gatsby Template compatibility)</li>
+</ul>
+
+<p>In the future, Janitor can help you with</p>
+
+<ul>
+  <li>Updating [[materialized-backlinks]]</li>
+  <li>Lint, format and structure notes</li>
+  <li>Rename and move notes around while keeping their references up to date.</li>
+</ul>
+
+<h2 id="using-janitor-from-vs-code-experimental">Using Janitor from VS Code (Experimental)</h2>
+
+<p>Execute the “Foam: Run Janitor” command from the command palette.</p>
+
+<p><img src="/assets/images/foam-janitor-demo.gif" alt="Foam Janitor demo" /></p>
+
+<h2 id="using-janitor-from-command-line-experimental">Using Janitor from command line (Experimental)</h2>
+
+<blockquote>
+  <p>⚠️ Improvements to this documentation are welcome!</p>
+</blockquote>
+
+<p>The Janitor can be installed from <a href="https://www.npmjs.com/">NPM</a> and executed as a standalone CLI tool:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;</span> npm <span class="nb">install</span> <span class="nt">-g</span> foam-cli
+<span class="o">&gt;</span> foam janitor path/to/workspace
+</code></pre></div></div>
+
+<p>You can run the Janitor as a git hook on every commit to ensure your workspace links are up to date. This can be especially helpful if you edit your markdown documents from other apps.</p>
+
+<p>You can also run the Janitor from a GitHub action to ensure that all changes coming to your workspace are up to date. This can be useful when editing your Foam notes from mobile (i.e. via <a href="https://gitjournal.io">GitJournal</a>), or your Foam has multiple contributors and you want to ensure that all changes are correctly integrated.</p>
+
+
+
+<script type="text/javascript">
+  // Hack: Replace page-link with "Page Title"
+  document.querySelectorAll(".markdown-body a[title]").forEach((a) => {
+    a.innerText = a.title;
+  });
+  // Hack: Remove .md extension from wikilinks to get the html in jekyll
+  document.querySelectorAll("a").forEach(l => {
+    if (l.href.endsWith('.md')) {
+      l.href = l.href.substring(0, l.href.length-3)
+    }
+  })
+</script>
+
+
+      
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.0/anchor.min.js" integrity="sha256-lZaRhKri35AyJSypXXs4o6OPFTbTmUoltBbDCbdzegg=" crossorigin="anonymous"></script>
+    <script>anchors.add();</script>
+  </body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Diagrams in Markdown | About these notes</title>
+<meta name="generator" content="Jekyll v4.3.3" />
+<meta property="og:title" content="Diagrams in Markdown" />
+<meta property="og:locale" content="en_US" />
+<link rel="canonical" href="http://localhost:4000/docs/recipes/diagrams-in-markdown/" />
+<meta property="og:url" content="http://localhost:4000/docs/recipes/diagrams-in-markdown/" />
+<meta property="og:site_name" content="About these notes" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Diagrams in Markdown" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","headline":"Diagrams in Markdown","url":"http://localhost:4000/docs/recipes/diagrams-in-markdown/"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <link rel="stylesheet" href="/assets/css/style.css?v=5e25ebfb6b5b6991017cbe8f9120d8b49deb4732">
+    <!-- start custom head snippets, customize with your own _includes/head-custom.html file -->
+
+<!-- Setup Google Analytics -->
+
+
+
+<!-- You can set your favicon here -->
+<!-- link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" -->
+
+<!-- end custom head snippets -->
+
+  </head>
+  <body>
+    <div class="container-lg px-3 my-5 markdown-body">
+      
+      <h1><a href="http://localhost:4000/">About these notes</a></h1>
+      
+
+      <h1 id="diagrams-in-markdown">Diagrams in Markdown</h1>
+
+<p>We have two alternative #recipe for displaying diagrams in markdown:</p>
+
+<ul>
+  <li><a href="#diagrams-in-markdown">Diagrams in Markdown</a>
+    <ul>
+      <li><a href="#mermaid">Mermaid</a></li>
+      <li><a href="#drawio">Draw.io</a>
+        <ul>
+          <li><a href="#using-drawio">Using Draw.io</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="mermaid">Mermaid</h2>
+
+<p>You can use <a href="https://marketplace.visualstudio.com/items?itemName=bierner.markdown-mermaid">Mermaid</a> plugin to draw and preview diagrams in your content.</p>
+
+<h2 id="drawio">Draw.io</h2>
+
+<p><a href="https://marketplace.visualstudio.com/items?itemName=hediet.vscode-drawio">Draw.io</a> extension allows you to create, edit, and display your diagrams without leaving Visual Studio Code. The <code class="language-plaintext highlighter-rouge">.drawio.svg</code> or <code class="language-plaintext highlighter-rouge">.drawio.png</code> files can be automatically embedded and displayed in published Foams, no export needed. FYI, the diagram below was made using Draw.io! You can check the diagram <a href="/assets/images/diagram-drawio-demo.drawio.svg">here</a>.</p>
+
+<p><img src="/assets/images/diagram-drawio-demo.drawio.svg" alt="diagram-drawio-demo" /></p>
+
+<h3 id="using-drawio">Using Draw.io</h3>
+
+<ol>
+  <li>Install <a href="https://marketplace.visualstudio.com/items?itemName=hediet.vscode-drawio">Draw.io</a> VS Code extension.</li>
+  <li>Create a new <code class="language-plaintext highlighter-rouge">*.drawio.svg</code> or <code class="language-plaintext highlighter-rouge">*.drawio.png</code> file.</li>
+  <li>Start drawing your diagram. Once you done, save it.</li>
+  <li>Embed the diagram file as you embedding the image file, for example: <code class="language-plaintext highlighter-rouge">![My Diagram](my-diagram.drawio.svg)</code></li>
+</ol>
+
+
+<script type="text/javascript">
+  // Hack: Replace page-link with "Page Title"
+  document.querySelectorAll(".markdown-body a[title]").forEach((a) => {
+    a.innerText = a.title;
+  });
+  // Hack: Remove .md extension from wikilinks to get the html in jekyll
+  document.querySelectorAll("a").forEach(l => {
+    if (l.href.endsWith('.md')) {
+      l.href = l.href.substring(0, l.href.length-3)
+    }
+  })
+</script>
+
+
+      
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.0/anchor.min.js" integrity="sha256-lZaRhKri35AyJSypXXs4o6OPFTbTmUoltBbDCbdzegg=" crossorigin="anonymous"></script>
+    <script>anchors.add();</script>
+  </body>
+</html>

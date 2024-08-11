@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Capture Notes With Shortcuts and GitHub Actions | About these notes</title>
+<meta name="generator" content="Jekyll v4.3.3" />
+<meta property="og:title" content="Capture Notes With Shortcuts and GitHub Actions" />
+<meta property="og:locale" content="en_US" />
+<link rel="canonical" href="http://localhost:4000/docs/recipes/capture-notes-with-shortcuts-and-github-actions/" />
+<meta property="og:url" content="http://localhost:4000/docs/recipes/capture-notes-with-shortcuts-and-github-actions/" />
+<meta property="og:site_name" content="About these notes" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Capture Notes With Shortcuts and GitHub Actions" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","headline":"Capture Notes With Shortcuts and GitHub Actions","url":"http://localhost:4000/docs/recipes/capture-notes-with-shortcuts-and-github-actions/"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <link rel="stylesheet" href="/assets/css/style.css?v=5e25ebfb6b5b6991017cbe8f9120d8b49deb4732">
+    <!-- start custom head snippets, customize with your own _includes/head-custom.html file -->
+
+<!-- Setup Google Analytics -->
+
+
+
+<!-- You can set your favicon here -->
+<!-- link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" -->
+
+<!-- end custom head snippets -->
+
+  </head>
+  <body>
+    <div class="container-lg px-3 my-5 markdown-body">
+      
+      <h1><a href="http://localhost:4000/">About these notes</a></h1>
+      
+
+      <h1 id="capture-notes-with-shortcuts-and-github-actions">Capture Notes With Shortcuts and GitHub Actions</h1>
+
+<p>With this #recipe you can create notes on your iOS device, which will automatically be imported into Foam.</p>
+
+<h2 id="context">Context</h2>
+
+<ul>
+  <li>You use <a href="https://marketplace.visualstudio.com/items?itemName=foam.foam-vscode">Foam for VSCode</a> to manage your notes</li>
+  <li>You wish to adopt a practice such as <a href="https://notes.andymatuschak.org/A%20writing%20inbox%20for%20transient%20and%20incomplete%20notes">A writing inbox for transient and incomplete notes</a></li>
+  <li>You wish to use <a href="https://support.apple.com/guide/shortcuts/welcome/ios">Shortcuts</a> to capture quick notes into your Foam notes from your iOS device</li>
+</ul>
+
+<h2 id="other-tools">Other tools</h2>
+
+<ul>
+  <li>We assume you are familiar with how to use GitHub (if you are using Foam this is implicit)</li>
+  <li>You have an iOS device.</li>
+</ul>
+
+<h2 id="instructions">Instructions</h2>
+
+<ol>
+  <li>Setup the <a href=""><code class="language-plaintext highlighter-rouge">foam-capture-action</code></a> in your GitHub Repository, to be triggered by “Workflow dispatch” events.</li>
+</ol>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>name: Manually triggered workflow
+on:
+  workflow_dispatch:
+    inputs:
+      data:
+        description: 'What information to put in the knowledge base.'
+        required: true
+
+jobs:
+  store_data:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - uses: anglinb/foam-capture-action@main
+      with:
+        
+        capture: ${{ github.event.inputs.data }}
+        
+    - run: |
+        git config --local user.email "example@gmail.com"
+        git config --local user.name "Your name"
+        git commit -m "Captured from workflow trigger" -a
+        git push -u origin master
+</code></pre></div></div>
+
+<ol>
+  <li>In GitHub <a href="https://github.com/settings/tokens">create a Personal Access Token</a> and give it <code class="language-plaintext highlighter-rouge">repo</code> scope - make a note of the token</li>
+  <li>Run this command to find your <code class="language-plaintext highlighter-rouge">workflow-id</code> to be used in the Shortcut.</li>
+</ol>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s2">"Accept: application/vnd.github.v3+json"</span> <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s2">"Authorization: Bearer &lt;GITHUB_TOKEN&gt;"</span> <span class="se">\</span>
+    https://api.github.com/repos/&lt;owner&gt;/&lt;repository&gt;/actions/workflows
+</code></pre></div></div>
+
+<ol>
+  <li>Copy this <a href="https://www.icloud.com/shortcuts/57d2ed90c40e43a5badcc174ebfaaf1d">Shortcut</a> to your iOS devices and edit the contents of the last step, <code class="language-plaintext highlighter-rouge">GetContentsOfURL</code>
+    <ul>
+      <li>Make sure you update the URL of the shortcut step with the <code class="language-plaintext highlighter-rouge">owner</code>, <code class="language-plaintext highlighter-rouge">repository</code>, <code class="language-plaintext highlighter-rouge">workflow-id</code> (from the previous step)</li>
+      <li>Make sure you update the headers of the shortcut step, replaceing <code class="language-plaintext highlighter-rouge">[GITHUB_TOKEN]</code> with your Personal Access Token (from step 2)</li>
+    </ul>
+  </li>
+  <li>Run the shortcut &amp; celebrate! ✨ (You should see a GitHub Action run start and the text you entered show up in <code class="language-plaintext highlighter-rouge">inbox.md</code> in your repository.)</li>
+</ol>
+
+
+<script type="text/javascript">
+  // Hack: Replace page-link with "Page Title"
+  document.querySelectorAll(".markdown-body a[title]").forEach((a) => {
+    a.innerText = a.title;
+  });
+  // Hack: Remove .md extension from wikilinks to get the html in jekyll
+  document.querySelectorAll("a").forEach(l => {
+    if (l.href.endsWith('.md')) {
+      l.href = l.href.substring(0, l.href.length-3)
+    }
+  })
+</script>
+
+
+      
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.0/anchor.min.js" integrity="sha256-lZaRhKri35AyJSypXXs4o6OPFTbTmUoltBbDCbdzegg=" crossorigin="anonymous"></script>
+    <script>anchors.add();</script>
+  </body>
+</html>

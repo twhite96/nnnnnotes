@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Markup Converter | About these notes</title>
+<meta name="generator" content="Jekyll v4.3.3" />
+<meta property="og:title" content="Markup Converter" />
+<meta property="og:locale" content="en_US" />
+<link rel="canonical" href="http://localhost:4000/docs/recipes/markup-converter/" />
+<meta property="og:url" content="http://localhost:4000/docs/recipes/markup-converter/" />
+<meta property="og:site_name" content="About these notes" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Markup Converter" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","headline":"Markup Converter","url":"http://localhost:4000/docs/recipes/markup-converter/"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <link rel="stylesheet" href="/assets/css/style.css?v=5e25ebfb6b5b6991017cbe8f9120d8b49deb4732">
+    <!-- start custom head snippets, customize with your own _includes/head-custom.html file -->
+
+<!-- Setup Google Analytics -->
+
+
+
+<!-- You can set your favicon here -->
+<!-- link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" -->
+
+<!-- end custom head snippets -->
+
+  </head>
+  <body>
+    <div class="container-lg px-3 my-5 markdown-body">
+      
+      <h1><a href="http://localhost:4000/">About these notes</a></h1>
+      
+
+      <h1 id="markup-converter">Markup Converter</h1>
+
+<p>This #recipe allows you to convert any document into Markdown for storing them in your notes.</p>
+
+<p>We will be using <a href="https://pandoc.org/">Pandoc</a>, a popular universal document converter. It can convert documents in Microsoft Word, HTML, LaTeX, and many other formats to various formats including markdown and many others.</p>
+
+<h2 id="instructions">Instructions</h2>
+
+<p>We will go through the example of converting Microsoft Word documents to Markdown. For detailed instructions on how to use Pandoc, please refer to the <a href="https://pandoc.org/MANUAL.html">Pandoc documentation</a>.</p>
+
+<ol>
+  <li><a href="https://pandoc.org/installing.html">Install Pandoc</a></li>
+  <li>Open the terminal of your choice and verify that Pandoc is installed by running <code class="language-plaintext highlighter-rouge">pandoc --version</code></li>
+  <li>Copy the Microsoft Word documents that you want to convert into a new folder</li>
+  <li>Change the current directory to the folder containing the Microsoft Word documents</li>
+  <li>Copy one of the following commands (based on your operating system) into your terminal and press <code class="language-plaintext highlighter-rouge">Enter</code> to run</li>
+</ol>
+
+<h3 id="linux-and-macos-bash">Linux and macOS (Bash)</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>find <span class="nt">-name</span> <span class="s2">"*.docx"</span> <span class="nt">-type</span> f <span class="nt">-exec</span> sh <span class="nt">-c</span> <span class="s1">'
+      for f; do
+         pandoc --extract-media=./ -f docx -t markdown -o "${f%.*}.md" "$f"
+      done
+   '</span> find-sh <span class="o">{}</span> +
+</code></pre></div></div>
+
+<h3 id="windows-powershell">Windows (PowerShell)</h3>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Get-ChildItem</span><span class="w"> </span><span class="o">.</span><span class="w"> </span><span class="nt">-Filter</span><span class="w"> </span><span class="o">*.</span><span class="nf">docx</span><span class="w"> </span><span class="o">|</span><span class="w"> 
+</span><span class="n">Foreach-Object</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="n">pandoc</span><span class="w"> </span><span class="nt">--extract-media</span><span class="o">=.</span><span class="n">/</span><span class="w"> </span><span class="nt">--from</span><span class="w"> </span><span class="nx">docx</span><span class="w"> </span><span class="nt">--to</span><span class="w"> </span><span class="nx">markdown</span><span class="w"> </span><span class="bp">$_</span><span class="w"> </span><span class="nt">-o</span><span class="w"> </span><span class="bp">$_</span><span class="o">.</span><span class="nf">Name</span><span class="o">.</span><span class="nf">Replace</span><span class="p">(</span><span class="s1">'.docx'</span><span class="p">,</span><span class="w"> </span><span class="s1">'.md'</span><span class="p">)</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="relevant-configurations">Relevant Configurations</h3>
+
+<p><a href="https://pandoc.org/">Pandoc</a> accepts a range of command line arguments to control the conversion process. Here, we’ll mention a few that are relevant to the example above.</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">--extract-media=./</code> is used to extract the images from the Microsoft Word documents and store them in a subfolder named <code class="language-plaintext highlighter-rouge">media</code></li>
+  <li><code class="language-plaintext highlighter-rouge">-t markdown</code> converts the Microsoft Word documents to <a href="https://pandoc.org/MANUAL.html#pandocs-markdown">Pandoc’s Markdown</a>. You can also use <code class="language-plaintext highlighter-rouge">-t gfm</code> to convert to <a href="https://docs.github.com/en/get-started/writing-on-github">GitHub Flavored Markdown</a></li>
+</ul>
+
+<p>Note that you may want to review the converted Markdown files to ensure that the conversion was successful. Then, You may want to delete the original Microsoft Word documents.</p>
+
+
+<script type="text/javascript">
+  // Hack: Replace page-link with "Page Title"
+  document.querySelectorAll(".markdown-body a[title]").forEach((a) => {
+    a.innerText = a.title;
+  });
+  // Hack: Remove .md extension from wikilinks to get the html in jekyll
+  document.querySelectorAll("a").forEach(l => {
+    if (l.href.endsWith('.md')) {
+      l.href = l.href.substring(0, l.href.length-3)
+    }
+  })
+</script>
+
+
+      
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.0/anchor.min.js" integrity="sha256-lZaRhKri35AyJSypXXs4o6OPFTbTmUoltBbDCbdzegg=" crossorigin="anonymous"></script>
+    <script>anchors.add();</script>
+  </body>
+</html>
